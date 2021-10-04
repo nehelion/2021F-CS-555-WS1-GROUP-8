@@ -1,0 +1,129 @@
+NOTE Alex Johnson
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE My Family
+1 DATE 20 SEP 2021
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Alex
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Paul Blart
+2 GIVN Paul Blart
+1 SEX M
+1 BIRT
+2 DATE 3 FEB 1882
+1 DEAT Y
+2 DATE 4 SEP 1952
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Patrick Mahomes
+2 GIVN Patrick Mahomes
+1 SEX M
+1 BIRT
+2 DATE 5 DEC 1905
+1 DEAT Y
+2 DATE 14 MAR 1986
+1 FAMS @F4@
+1 FAMC @F1@
+0 @I3@ INDI
+1 NAME Jennifer Anniston /Jennifer Blart/
+2 GIVN Jennifer Anniston
+2 SURN Jennifer Blart
+2 _MARNM Jennifer Blart
+1 SEX F
+1 BIRT
+2 DATE 5 JUN 1879
+1 DEAT Y
+2 DATE 6 AUG 1944
+1 FAMS @F1@
+0 @I4@ INDI
+1 NAME Lordeth Farquadeth
+2 GIVN Lordeth Farquadeth
+1 SEX F
+1 BIRT
+2 DATE 8 SEP 1950
+1 FAMS @F2@
+1 FAMS @F3@
+1 FAMC @F4@
+0 @I5@ INDI
+1 NAME Senior Lordeth
+2 GIVN Senior Lordeth
+1 SEX F
+1 BIRT
+2 DATE 5 JUL 1900
+1 DEAT Y
+2 DATE 2 OCT 1985
+1 FAMS @F4@
+0 @I6@ INDI
+1 NAME Whitney Houston
+2 GIVN Whitney Houston
+1 SEX F
+1 BIRT
+2 DATE 7 MAY 1962
+1 DEAT Y
+2 DATE 6 JUL 1990
+1 FAMS @F3@
+0 @I7@ INDI
+1 NAME Ronald McDonald
+2 GIVN Ronald McDonald
+1 SEX F
+1 BIRT
+2 DATE 5 JUN 1990
+1 FAMS @F2@
+0 @I8@ INDI
+1 NAME Socrates
+2 GIVN Socrates
+1 SEX M
+1 BIRT
+2 DATE 9 AUG 1985
+1 FAMC @F3@
+0 @I9@ INDI
+1 NAME Serperence
+2 GIVN Serperence
+1 SEX F
+1 BIRT
+2 DATE 3 AUG 2010
+1 FAMC @F2@
+0 @I10@ INDI
+1 NAME Obama /McRib/
+2 GIVN Obama
+2 SURN McRib
+2 _MARNM McRib
+1 SEX M
+1 BIRT
+2 DATE 6 JUL 1965
+1 FAMC @F4@
+2 PEDI adopted
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I3@
+1 CHIL @I2@
+1 _CURRENT N
+0 @F2@ FAM
+1 HUSB @I4@
+1 WIFE @I7@
+1 CHIL @I9@
+1 _CURRENT Y
+0 @F3@ FAM
+1 HUSB @I4@
+1 WIFE @I6@
+1 CHIL @I8@
+1 MARR
+2 DATE 7 MAY 1977
+2 PLAC Iraq
+1 EVEN
+2 TYPE Ending
+1 _CURRENT N
+0 @F4@ FAM
+1 HUSB @I2@
+1 WIFE @I5@
+1 CHIL @I4@
+1 CHIL @I10@
+1 _CURRENT N
+0 TRLR
