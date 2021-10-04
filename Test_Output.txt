@@ -1,0 +1,351 @@
+
+Compiling...
+done!
+
+Executing:
+
+Enter Path of GED file: Kulpin_Family.ged
+--> 0 NOTE Alexander Kulpin Project 1
+<-- 0|NOTE|Y|Alexander Kulpin Project 1
+--> 0 HEAD
+<-- 0|HEAD|Y
+--> 1 SOUR Family Echo
+<-- 1|SOUR|N|Family Echo
+--> 2 WWW http://www.familyecho.com/
+<-- 2|WWW|N|http://www.familyecho.com/
+--> 1 FILE My Family
+<-- 1|FILE|N|My Family
+--> 1 DATE 20 SEP 2021
+<-- 1|DATE|Y|20 SEP 2021
+--> 1 DEST ANSTFILE
+<-- 1|DEST|N|ANSTFILE
+--> 1 GEDC
+<-- 1|GEDC|N
+--> 2 VERS 5.5.1
+<-- 2|VERS|N|5.5.1
+--> 2 FORM LINEAGE-LINKED
+<-- 2|FORM|N|LINEAGE-LINKED
+--> 1 SUBM @I1@
+<-- 1|SUBM|N|@I1@
+--> 2 NAME Alex
+<-- 2|NAME|Y|Alex
+--> 1 SUBN
+<-- 1|SUBN|N
+--> 1 CHAR UTF-8
+<-- 1|CHAR|N|UTF-8
+--> 0 @I1@ INDI
+<-- 0|INDI|Y|@I1@
+--> 1 NAME Jackeavich /Longston/
+<-- 1|NAME|Y|Jackeavich /Longston/
+--> 2 GIVN Jackeavich
+<-- 2|GIVN|N|Jackeavich
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 6 APR 1970
+<-- 2|DATE|Y|6 APR 1970
+--> 1 DEAT Y
+<-- 1|DEAT|Y|Y
+--> 2 DATE 10 JAN 2000
+<-- 2|DATE|Y|10 JAN 2000
+--> 1 FAMS @F1@
+<-- 1|FAMS|Y|@F1@
+--> 1 FAMC @F2@
+<-- 1|FAMC|Y|@F2@
+--> 0 @I2@ INDI
+<-- 0|INDI|Y|@I2@
+--> 1 NAME Jackeavichelion /Longston/
+<-- 1|NAME|Y|Jackeavichelion /Longston/
+--> 2 GIVN Jackeavichelion
+<-- 2|GIVN|N|Jackeavichelion
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 14 OCT 1945
+<-- 2|DATE|Y|14 OCT 1945
+--> 1 DEAT Y
+<-- 1|DEAT|Y|Y
+--> 2 DATE 16 FEB 1987
+<-- 2|DATE|Y|16 FEB 1987
+--> 1 FAMS @F2@
+<-- 1|FAMS|Y|@F2@
+--> 0 @I3@ INDI
+<-- 0|INDI|Y|@I3@
+--> 1 NAME Mariandel /Endale/
+<-- 1|NAME|Y|Mariandel /Endale/
+--> 2 GIVN Mariandel
+<-- 2|GIVN|N|Mariandel
+--> 2 SURN Endale
+<-- 2|SURN|N|Endale
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX F
+<-- 1|SEX|Y|F
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 5 SEP 1951
+<-- 2|DATE|Y|5 SEP 1951
+--> 1 FAMS @F2@
+<-- 1|FAMS|Y|@F2@
+--> 0 @I4@ INDI
+<-- 0|INDI|Y|@I4@
+--> 1 NAME Jacke /Longston/
+<-- 1|NAME|Y|Jacke /Longston/
+--> 2 GIVN Jacke
+<-- 2|GIVN|N|Jacke
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 11 MAR 1992
+<-- 2|DATE|Y|11 MAR 1992
+--> 1 FAMC @F1@
+<-- 1|FAMC|Y|@F1@
+--> 0 @I5@ INDI
+<-- 0|INDI|Y|@I5@
+--> 1 NAME Iielevia /Allienvir/
+<-- 1|NAME|Y|Iielevia /Allienvir/
+--> 2 GIVN Iielevia
+<-- 2|GIVN|N|Iielevia
+--> 2 SURN Allienvir
+<-- 2|SURN|N|Allienvir
+--> 2 _MARNM Duebelo
+<-- 2|_MARNM|N|Duebelo
+--> 1 SEX F
+<-- 1|SEX|Y|F
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 9 APR 1972
+<-- 2|DATE|Y|9 APR 1972
+--> 1 FAMS @F1@
+<-- 1|FAMS|Y|@F1@
+--> 1 FAMS @F3@
+<-- 1|FAMS|Y|@F3@
+--> 0 @I6@ INDI
+<-- 0|INDI|Y|@I6@
+--> 1 NAME Karpevich /Longston/
+<-- 1|NAME|Y|Karpevich /Longston/
+--> 2 GIVN Karpevich
+<-- 2|GIVN|N|Karpevich
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 12 DEC 1979
+<-- 2|DATE|Y|12 DEC 1979
+--> 1 FAMS @F4@
+<-- 1|FAMS|Y|@F4@
+--> 1 FAMC @F2@
+<-- 1|FAMC|Y|@F2@
+--> 0 @I7@ INDI
+<-- 0|INDI|Y|@I7@
+--> 1 NAME Karp /Longston/
+<-- 1|NAME|Y|Karp /Longston/
+--> 2 GIVN Karp
+<-- 2|GIVN|N|Karp
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 1 JUL 2002
+<-- 2|DATE|Y|1 JUL 2002
+--> 1 FAMC @F4@
+<-- 1|FAMC|Y|@F4@
+--> 0 @I8@ INDI
+<-- 0|INDI|Y|@I8@
+--> 1 NAME Ghalara /Rholgar/
+<-- 1|NAME|Y|Ghalara /Rholgar/
+--> 2 GIVN Ghalara
+<-- 2|GIVN|N|Ghalara
+--> 2 SURN Rholgar
+<-- 2|SURN|N|Rholgar
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX F
+<-- 1|SEX|Y|F
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 15 MAR 1983
+<-- 2|DATE|Y|15 MAR 1983
+--> 1 DEAT Y
+<-- 1|DEAT|Y|Y
+--> 2 DATE 18 AUG 2001
+<-- 2|DATE|Y|18 AUG 2001
+--> 1 FAMS @F4@
+<-- 1|FAMS|Y|@F4@
+--> 0 @I9@ INDI
+<-- 0|INDI|Y|@I9@
+--> 1 NAME Jaizey /Longston/
+<-- 1|NAME|Y|Jaizey /Longston/
+--> 2 GIVN Jaizey
+<-- 2|GIVN|N|Jaizey
+--> 2 SURN Longston
+<-- 2|SURN|N|Longston
+--> 2 _MARNM Longston
+<-- 2|_MARNM|N|Longston
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 19 MAY 1999
+<-- 2|DATE|Y|19 MAY 1999
+--> 1 FAMC @F1@
+<-- 1|FAMC|Y|@F1@
+--> 0 @I10@ INDI
+<-- 0|INDI|Y|@I10@
+--> 1 NAME Valthadeor /Duebelo/
+<-- 1|NAME|Y|Valthadeor /Duebelo/
+--> 2 GIVN Valthadeor
+<-- 2|GIVN|N|Valthadeor
+--> 2 SURN Duebelo
+<-- 2|SURN|N|Duebelo
+--> 2 _MARNM Duebelo
+<-- 2|_MARNM|N|Duebelo
+--> 1 SEX M
+<-- 1|SEX|Y|M
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 9 AUG 1969
+<-- 2|DATE|Y|9 AUG 1969
+--> 1 FAMS @F3@
+<-- 1|FAMS|Y|@F3@
+--> 0 @I11@ INDI
+<-- 0|INDI|Y|@I11@
+--> 1 NAME Maria /Duebelo/
+<-- 1|NAME|Y|Maria /Duebelo/
+--> 2 GIVN Maria
+<-- 2|GIVN|N|Maria
+--> 2 SURN Duebelo
+<-- 2|SURN|N|Duebelo
+--> 2 _MARNM Duebelo
+<-- 2|_MARNM|N|Duebelo
+--> 1 SEX F
+<-- 1|SEX|Y|F
+--> 1 BIRT
+<-- 1|BIRT|Y
+--> 2 DATE 7 NOV 2005
+<-- 2|DATE|Y|7 NOV 2005
+--> 1 FAMC @F3@
+<-- 1|FAMC|Y|@F3@
+--> 0 @F1@ FAM
+<-- 0|FAM|Y|@F1@
+--> 1 HUSB @I1@
+<-- 1|HUSB|Y|@I1@
+--> 1 WIFE @I5@
+<-- 1|WIFE|Y|@I5@
+--> 1 CHIL @I4@
+<-- 1|CHIL|Y|@I4@
+--> 1 CHIL @I9@
+<-- 1|CHIL|Y|@I9@
+--> 1 MARR
+<-- 1|MARR|Y
+--> 2 DATE 8 JAN 1998
+<-- 2|DATE|Y|8 JAN 1998
+--> 2 PLAC Javalania
+<-- 2|PLAC|N|Javalania
+--> 1 EVEN
+<-- 1|EVEN|N
+--> 2 TYPE Ending
+<-- 2|TYPE|N|Ending
+--> 2 DATE 3 JUN 2000
+<-- 2|DATE|Y|3 JUN 2000
+--> 1 _CURRENT N
+<-- 1|_CURRENT|N|N
+--> 0 @F2@ FAM
+<-- 0|FAM|Y|@F2@
+--> 1 HUSB @I2@
+<-- 1|HUSB|Y|@I2@
+--> 1 WIFE @I3@
+<-- 1|WIFE|Y|@I3@
+--> 1 CHIL @I1@
+<-- 1|CHIL|Y|@I1@
+--> 1 CHIL @I6@
+<-- 1|CHIL|Y|@I6@
+--> 1 MARR
+<-- 1|MARR|Y
+--> 2 DATE 13 SEP 1970
+<-- 2|DATE|Y|13 SEP 1970
+--> 2 PLAC Javalania
+<-- 2|PLAC|N|Javalania
+--> 1 _CURRENT Y
+<-- 1|_CURRENT|N|Y
+--> 0 @F3@ FAM
+<-- 0|FAM|Y|@F3@
+--> 1 HUSB @I10@
+<-- 1|HUSB|Y|@I10@
+--> 1 WIFE @I5@
+<-- 1|WIFE|Y|@I5@
+--> 1 CHIL @I11@
+<-- 1|CHIL|Y|@I11@
+--> 1 MARR
+<-- 1|MARR|Y
+--> 2 DATE 9 NOV 2000
+<-- 2|DATE|Y|9 NOV 2000
+--> 2 PLAC Debelia
+<-- 2|PLAC|N|Debelia
+--> 1 _CURRENT Y
+<-- 1|_CURRENT|N|Y
+--> 0 @F4@ FAM
+<-- 0|FAM|Y|@F4@
+--> 1 HUSB @I6@
+<-- 1|HUSB|Y|@I6@
+--> 1 WIFE @I8@
+<-- 1|WIFE|Y|@I8@
+--> 1 CHIL @I7@
+<-- 1|CHIL|Y|@I7@
+--> 1 MARR
+<-- 1|MARR|Y
+--> 2 DATE 10 JUL 1990
+<-- 2|DATE|Y|10 JUL 1990
+--> 2 PLAC Karpavalania
+<-- 2|PLAC|N|Karpavalania
+--> 1 EVEN
+<-- 1|EVEN|N
+--> 2 TYPE Ending
+<-- 2|TYPE|N|Ending
+--> 1 _CURRENT N
+<-- 1|_CURRENT|N|N
+--> 0 TRLR
+<-- 0|TRLR|Y
+************************************
+Individuals
+ID: @I1@ Name: Jackeavich /Longston/
+ID: @I2@ Name: Jackeavichelion /Longston/
+ID: @I3@ Name: Mariandel /Endale/
+ID: @I4@ Name: Jacke /Longston/
+ID: @I5@ Name: Iielevia /Allienvir/
+ID: @I6@ Name: Karpevich /Longston/
+ID: @I7@ Name: Karp /Longston/
+ID: @I8@ Name: Ghalara /Rholgar/
+ID: @I9@ Name: Jaizey /Longston/
+ID: @I10@ Name: Valthadeor /Duebelo/
+ID: @I11@ Name: Maria /Duebelo/
+************************************
+Families
+ID: @F1@ Husband ID: @I1@ Husband Name: Jackeavich /Longston/ Wife ID: @I5@ Wife Name: Iielevia /Allienvir/
+ID: @F2@ Husband ID: @I2@ Husband Name: Jackeavichelion /Longston/ Wife ID: @I3@ Wife Name: Mariandel /Endale/
+ID: @F3@ Husband ID: @I10@ Husband Name: Valthadeor /Duebelo/ Wife ID: @I5@ Wife Name: Iielevia /Allienvir/
+ID: @F4@ Husband ID: @I6@ Husband Name: Karpevich /Longston/ Wife ID: @I8@ Wife Name: Ghalara /Rholgar/
+Hit ENTER to continue...
