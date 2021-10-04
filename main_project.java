@@ -18,7 +18,7 @@ public class main_project
 		int c = 0;
 		String valid = "N";
 		
-		Path path = Paths.get("Longston_Family.ged");
+		Path path = Paths.get("Kulpin_Family.ged");
 		
 		String strOut = Files.readString(path, StandardCharsets.ISO_8859_1);
 		
