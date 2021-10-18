@@ -17,6 +17,25 @@ public class main_project
 	public static ArrayList<Individual> individuals = new ArrayList<Individual>();
 	public static ArrayList<Family> families = new ArrayList<Family>();
 
+	private static String readFile(String filePath) 
+    {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) 
+        {
+ 
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) 
+            {
+                contentBuilder.append(sCurrentLine).append("\n");
+            }
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
+    }
+
     public static void main(String[] args) throws Exception
 	{
 		int c = 0;
@@ -26,10 +45,8 @@ public class main_project
 		System.out.print("Enter Path of GED file: ");
 		
 		String pathName = myObj.nextLine();
-		
-		Path path = Paths.get(pathName);
-		
-		String strOut = Files.readString(path, StandardCharsets.ISO_8859_1);
+				
+		String strOut = readFile(pathName);
 		
 		String[] lines = strOut.split("\r\n");
 		
