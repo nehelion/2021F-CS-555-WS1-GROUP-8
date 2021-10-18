@@ -7,13 +7,17 @@ public class Family
     private String husbandID;
     private String wifeID;
     private ArrayList<String> children;
+    private String marrDate;
+    private String divDate;
     
-    public Family(String ID, String husbandID, String wifeID, ArrayList<String> children)
+    public Family(String ID, String husbandID, String wifeID, ArrayList<String> children, String marrDate, String divDate)
     {
         this.ID = ID;
         this.husbandID = husbandID;
         this.wifeID = wifeID;
         this.children = children;
+        this.marrDate = marrDate;
+        this.divDate = divDate;
     }
     
     String getID()
@@ -26,6 +30,14 @@ public class Family
         return this.husbandID;
     }
     
+    String getMarrDate()
+    {
+        return this.marrDate;
+    }
+    String getDivDate()
+    {
+        return this.divDate;
+    }
     // String getHusbandName()
     // {
     //     for(int j = 0; j < individuals.size(); j++)

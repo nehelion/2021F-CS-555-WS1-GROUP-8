@@ -51,6 +51,21 @@ public class Utils {
         return false;
     }
 
+   //  public boolean isMarriageBeforeDeath(Family[] families)
+   //  {
+   //    for (Family fams : families) {
+	// 		if(fams.getWifeID() != null && fams.getHusbandID() != null)
+	// 		{
+	// 			String wife_id = fams.getWifeID();
+	// 			String husb_id = fams.getHusbandID();
+	// 			Individual temp_wife = indi_dict.get(wife_id);
+	// 			Individual temp_husb = indi_dict.get(husb_id);	
+
+	// 		}
+	// 	}
+   //  }
+    
+
     public String readFile(String filePath) 
     {
         StringBuilder contentBuilder = new StringBuilder();

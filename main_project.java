@@ -19,6 +19,7 @@ public class main_project
 	public static Utils utils = new Utils();
 
 	private static void storeIndivs(String[] lines) {
+		String deathday = null;
 		for (int i = 0; i < lines.length; i++) {
 			String[] sections = lines[i].split(" ");
 			if (sections.length > 2 && sections[2].equalsIgnoreCase("INDI")) {
@@ -33,21 +34,35 @@ public class main_project
 				String birthday = birth_secs[2] + "/";
 				birthday += utils.monthToInt(birth_secs[1]) + "/";
 				birthday += birth_secs[0];
+				if(lines[i+8].split(" ")[1].equalsIgnoreCase("DEAT"))
+				{
+					String[] death_date_secs = lines[i+9].split(" ", 3);
+					String[] death_secs = death_date_secs[2].split(" ");
+					deathday = death_secs[2] + "/";
+					deathday += utils.monthToInt(death_secs[1]) + "/";
+					deathday += death_secs[0];
+				}
+				
 
-				Individual indiv = new Individual(sections[1], name, sex, birthday);
+				Individual indiv = new Individual(sections[1], name, sex, birthday, deathday);
 				individuals.put(indiv.getID(), indiv);
 			}
 		}
 	}
 
 	private static void storeFamilies(String[] lines) {
+		boolean sameFam = false;
 		for (int i = 0; i < lines.length; i++) {
+			System.out.println(i);
 			String[] sections = lines[i].split(" ");
 			if (sections.length > 2 && sections[2].equalsIgnoreCase("FAM")) {
+				String divDate = null;
+				String marrDate = null;
 				String[] husb_secs = lines[i+1].split(" ");
 				String husb = husb_secs[2];
 
 				String[] wife_secs = lines[i+2].split(" ");
+				System.out.println(wife_secs[0] + " " + wife_secs[1]);
 				String wife = wife_secs[2];
 
 				ArrayList<String> children = new ArrayList<>();
@@ -56,8 +71,21 @@ public class main_project
 					children.add(lines[i+j].split(" ")[2]);
 					j++;
 				}
+				if(lines[i+j].split(" ")[1].equalsIgnoreCase("MARR"))
+				{
+					j++;
+					marrDate = lines[i+j].split(" ")[2] + " " + lines[i+j].split(" ")[3] + " " + lines[i+j].split(" ")[4];
+					j++;
+					j++;
+				}
 
-				Family fam = new Family(sections[1], husb, wife, children);
+				if(lines[i+j].split(" ")[1].equalsIgnoreCase("DIV"))
+				{
+					j++;
+					divDate = lines[i+j].split(" ")[2] + " " + lines[i+j].split(" ")[3] + " " + lines[i+j].split(" ")[4];
+					j++;
+				}
+				Family fam = new Family(sections[1], husb, wife, children, marrDate, divDate);
 				families.put(fam.getID(), fam);
 			}
 		}
@@ -68,7 +96,7 @@ public class main_project
 		List<Individual> ar = new ArrayList<Individual>(individuals.values());
 		for (int i = 0; i < ar.size(); i++) {
 			Individual ind = ar.get(i);
-			System.out.println(ind.getID() + " | " + ind.getName());
+			System.out.println(ind.getID() + " | " + ind.getName()+ " | "+ ind.getBirthday() +" | "+ ind.getDeathday());
 		}
 	}
 
@@ -79,7 +107,7 @@ public class main_project
 			Family fam = ar.get(i);
 			String wife = individuals.get(fam.getWifeID()).getName();
 			String husb = individuals.get(fam.getHusbandID()).getName();
-			System.out.println(fam.getID() + " | " + husb + " | " + wife + " | " + fam.getChildren().toString());
+			System.out.println(fam.getID() + " | " + husb + " | " + wife + " | " + fam.getChildren().toString() + " | " + fam.getMarrDate() + " | " + fam.getDivDate());
 		}
 	}
 

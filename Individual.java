@@ -6,13 +6,15 @@ public class Individual
     private String name;
     private String gender;
     private String birthday;
+    private String deathday;
     
-    public Individual(String ID, String name, String gender, String birthday)
+    public Individual(String ID, String name, String gender, String birthday, String deathday)
     {
         this.ID = ID;
         this.name = name;
         this.gender = gender;
         this.birthday = birthday;
+        this.deathday = deathday;
     }
     
     String getID()
@@ -34,6 +36,12 @@ public class Individual
     {
         return this.birthday;
     }
+
+    String getDeathday()
+    {
+        return this.deathday;
+    }
+    
     
     String toTestString()
     {
