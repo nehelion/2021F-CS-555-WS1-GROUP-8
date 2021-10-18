@@ -1,6 +1,6 @@
 /*
  *  Agile Methods for Software Development - Project 2
- *  Author: Alexander Kulpin
+ *  Author: Alexander Kulpin, Alex Johnson, Joe Basile
  *  Date: 09/27/2021
  */
 
@@ -14,8 +14,74 @@ import java.nio.charset.StandardCharsets;
 
 public class main_project
 {	
-	public static ArrayList<Individual> individuals = new ArrayList<Individual>();
-	public static ArrayList<Family> families = new ArrayList<Family>();
+	public static Map<String, Individual> individuals = new HashMap<String, Individual>();
+	public static Map<String, Family> families = new HashMap<String, Family>();
+	public static Utils utils = new Utils();
+
+	private static void storeIndivs(String[] lines) {
+		for (int i = 0; i < lines.length; i++) {
+			String[] sections = lines[i].split(" ");
+			if (sections.length > 2 && sections[2].equalsIgnoreCase("INDI")) {
+				String[] name_secs = lines[i+1].split(" ", 3);
+				String name = name_secs[2].replace("/", "");
+
+				String[] sex_secs = lines[i+5].split(" ", 3);
+				String sex = sex_secs[2];
+
+				String[] date_secs = lines[i+7].split(" ", 3);
+				String[] birth_secs = date_secs[2].split(" ");
+				String birthday = birth_secs[2] + "/";
+				birthday += utils.monthToInt(birth_secs[1]) + "/";
+				birthday += birth_secs[0];
+
+				Individual indiv = new Individual(sections[1], name, sex, birthday);
+				individuals.put(indiv.getID(), indiv);
+			}
+		}
+	}
+
+	private static void storeFamilies(String[] lines) {
+		for (int i = 0; i < lines.length; i++) {
+			String[] sections = lines[i].split(" ");
+			if (sections.length > 2 && sections[2].equalsIgnoreCase("FAM")) {
+				String[] husb_secs = lines[i+1].split(" ");
+				String husb = husb_secs[2];
+
+				String[] wife_secs = lines[i+2].split(" ");
+				String wife = wife_secs[2];
+
+				ArrayList<String> children = new ArrayList<>();
+				int j = 3;
+				while(lines[i+j].split(" ")[1].equalsIgnoreCase("CHIL")) {
+					children.add(lines[i+j].split(" ")[2]);
+					j++;
+				}
+
+				Family fam = new Family(sections[1], husb, wife, children);
+				families.put(fam.getID(), fam);
+			}
+		}
+	}
+
+	private static void printIndividuals() {
+		System.out.print("\n****************************************\n                Individuals             \n****************************************\n");
+		List<Individual> ar = new ArrayList<Individual>(individuals.values());
+		for (int i = 0; i < ar.size(); i++) {
+			Individual ind = ar.get(i);
+			System.out.println(ind.getID() + " | " + ind.getName());
+		}
+	}
+
+	private static void printFamilies() {
+		System.out.print("\n****************************************\n                 Families             \n****************************************\n");
+		List<Family> ar = new ArrayList<Family>(families.values());
+		for (int i = 0; i < ar.size(); i++) {
+			Family fam = ar.get(i);
+			String wife = individuals.get(fam.getWifeID()).getName();
+			String husb = individuals.get(fam.getHusbandID()).getName();
+			System.out.println(fam.getID() + " | " + husb + " | " + wife + " | " + fam.getChildren().toString());
+		}
+	}
 
     public static void main(String[] args) throws Exception
 	{
@@ -25,15 +91,18 @@ public class main_project
 		Scanner myObj = new Scanner(System.in);
 		System.out.print("Enter Path of GED file: ");
 		
-		String pathName = myObj.nextLine();
+		//String pathName = myObj.nextLine();				
+		String pathName = "resources/Kulpin_Family.ged";
+		String strOut = utils.readFile(pathName);
+		String[] lines = strOut.split("\n");
+
+		storeIndivs(lines);
+		storeFamilies(lines);
+
+		printIndividuals();
+		printFamilies();
 		
-		Path path = Paths.get(pathName);
-		
-		String strOut = Files.readString(path, StandardCharsets.ISO_8859_1);
-		
-		String[] lines = strOut.split("\r\n");
-		
-		for(int i = 0; i < lines.length; i++)
+		/*for(int i = 0; i < lines.length; i++)
 		{
 			System.out.println("--> " + lines[i]); 
 			
@@ -136,16 +205,16 @@ public class main_project
 							{
 								String[] divDate = lines[i + j + 1].split(" ", 3);
 								String[] divDateSec = divDate[2].split(" ", 3);
-								String[] husbandDateSec = tempFamily.getHusbandBirthDay(sectionsHusbandsID[2]).split(" ", 3);
-								String[] wifeDateSec = tempFamily.getWifeBirthDay(sectionsWifesID[2]).split(" ", 3);
-								if(!isDateAhead(husbandDateSec, divDateSec))
-								{
-									System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
-								}
-								else if(!isDateAhead(wifeDateSec, divDateSec))
-								{
-									System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
-								}
+								// String[] husbandDateSec = tempFamily.getHusbandBirthDay(sectionsHusbandsID[2]).split(" ", 3);
+								// String[] wifeDateSec = tempFamily.getWifeBirthDay(sectionsWifesID[2]).split(" ", 3);
+								// if(!isDateAhead(husbandDateSec, divDateSec))
+								// {
+								// 	System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
+								// }
+								// else if(!isDateAhead(wifeDateSec, divDateSec))
+								// {
+								// 	System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
+								// }
 								break;
 							}
 							else if(isDiv[1].equals("MARR"))
@@ -194,7 +263,7 @@ public class main_project
 		
 		for(int j = 0; j < individuals.size(); j++)
 		{
-			System.out.println(individuals.get(j).toTestString());
+			// System.out.println(individuals.get(j).toTestString());
 		}
 		
 		System.out.println("************************************");
@@ -202,8 +271,8 @@ public class main_project
 		
 		for(int j = 0; j < families.size(); j++)
 		{
-			System.out.println(families.get(j).toTestString());
-		}
+			// System.out.println(families.get(j).toTestString());
+		}*/
 	}
 	
 	enum Tag 
@@ -245,184 +314,23 @@ public class main_project
 		}
 	}
 	
-	public static class Individual
-	{
-		private String ID;
-		private String name;
-		private String gender;
-		private String birthday;
-		
-		public Individual(String ID, String name, String gender, String birthday)
-		{
-			this.ID = ID;
-			this.name = name;
-			this.gender = gender;
-			this.birthday = birthday;
-		}
-		
-		String getID()
-		{
-			return this.ID;
-		}
-		
-		String getName()
-		{
-			return this.name;
-		}
-		
-		String getGender()
-		{
-			return this.gender;
-		}
-		
-		String getBirthday()
-		{
-			return this.birthday;
-		}
-		
-		String toTestString()
-		{
-			return "ID: " + this.ID + " Name: " + this.name; // + " Gender: " + this.gender + " Birthday: " + this.birthday;
-		}
-	}
-	
-	public static class Family
-	{
-		private String ID;
-		private String husbandID;
-		private String wifeID;
-		private ArrayList<String> children;
-		
-		public Family(String ID, String husbandID, String wifeID, ArrayList<String> children)
-		{
-			this.ID = ID;
-			this.husbandID = husbandID;
-			this.wifeID = wifeID;
-			this.children = children;
-		}
-		
-		String getID()
-		{
-			return this.ID;
-		}
-		
-		String getHusbandID()
-		{
-			return this.husbandID;
-		}
-		
-		String getHusbandName()
-		{
-			for(int j = 0; j < individuals.size(); j++)
-			{
-				if(this.husbandID.equals(individuals.get(j).getID()))
-				{
-					return individuals.get(j).getName();
-				}
-			}
-			return "ERROR";
-		}
-		
-		String getHusbandBirthDay(String inputHusbandID)
-		{
-			for(int j = 0; j < individuals.size(); j++)
-			{
-				if(inputHusbandID.equals(individuals.get(j).getID()))
-				{
-					return individuals.get(j).getBirthday();
-				}
-			}
-			return "ERROR";
-		}
-		
-		String getWifeID()
-		{
-			return this.wifeID;
-		}
-		
-		String getWifeName()
-		{
-			for(int j = 0; j < individuals.size(); j++)
-			{
-				if(this.wifeID.equals(individuals.get(j).getID()))
-				{
-					return individuals.get(j).getName();
-				}
-			}
-			return "ERROR";
-		}
-		
-		String getWifeBirthDay(String inputWifeID)
-		{
-			for(int j = 0; j < individuals.size(); j++)
-			{
-				if(inputWifeID.equals(individuals.get(j).getID()))
-				{
-					return individuals.get(j).getBirthday();
-				}
-			}
-			return "ERROR";
-		}
-		
-		ArrayList<String> getChildren()
-		{
-			return this.children;
-		}
-		
-		String toTestString()
-		{
-			return "ID: " + this.ID + " Husband ID: " + this.husbandID + " Husband Name: " + getHusbandName() + " Wife ID: " + this.wifeID + " Wife Name: " + getWifeName(); //+ "-" + this.children;
-		}
-	}
+
 	
 	// Test if dateToBeFirst is in fact a date that comes before the dateToBeAfter
-	public static boolean isDateAhead(String[] dateToBeFirst, String[] dateToBeAfter)
-	{
-		if(Integer.parseInt(dateToBeFirst[2]) <= Integer.parseInt(dateToBeAfter[2]))
-		{
-			if(monthToInt(dateToBeFirst[1]) <= monthToInt(dateToBeAfter[1]))
-			{
-				if(Integer.parseInt(dateToBeFirst[0]) < Integer.parseInt(dateToBeAfter[0]))
-				{
-					return false;
-				}
-			}
-		}
+	// public static boolean isDateAhead(String[] dateToBeFirst, String[] dateToBeAfter)
+	// {
+	// 	if(Integer.parseInt(dateToBeFirst[2]) <= Integer.parseInt(dateToBeAfter[2]))
+	// 	{
+	// 		if(monthToInt(dateToBeFirst[1]) <= monthToInt(dateToBeAfter[1]))
+	// 		{
+	// 			if(Integer.parseInt(dateToBeFirst[0]) < Integer.parseInt(dateToBeAfter[0]))
+	// 			{
+	// 				return false;
+	// 			}
+	// 		}
+	// 	}
 		
-		return true;
-	}
-	
-	public static int monthToInt(String month)
-	{
-		switch (month) 
-		{
-            case "JAN": 
-				return 1;
-            case "FEB":  
-				return 2;
-            case "MAR": 
-				return 3;
-            case "APR":  
-				return 4;
-            case "MAY": 
-				return 5;
-            case "JUN": 
-				return 6;
-            case "JUL": 
-				return 7;
-            case "AUG":  
-				return 8;
-            case "SEP": 
-				return 9;
-            case "OCT": 
-				return 10;
-            case "NOV": 
-				return 11;
-            case "DEC": 
-				return 12;
-            default: 
-				return -1;
-        }
-	}
+	// 	return true;
+	// }
 }
 
