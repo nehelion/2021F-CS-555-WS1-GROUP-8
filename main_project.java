@@ -35,15 +35,7 @@ public class main_project
 		
 		for(int i = 0; i < lines.length; i++)
 		{
-			System.out.println("--> " + lines[i]);
-			
-			
-			
-			
-			
-			
-			
-			
+			System.out.println("--> " + lines[i]); 
 			
 			for(int j = 0; j < lines[i].length(); j++)
 			{
@@ -67,13 +59,54 @@ public class main_project
 						String[] sectionsBirthday = lines[i + 7].split(" ", 3);
 					
 						Individual tempIndividual = new Individual(sections[1], sectionsName[2], sectionsGender[2], sectionsBirthday[2]);
+						
+						// US07: Death should be less than 150 years after birth for dead people, 
+						//       and current date should be less than 150 years after birth for all living people
+						if((Integer.parseInt((sectionsBirthday[2].split(" ", 3))[2])) + 150 < Calendar.getInstance().get(Calendar.YEAR))
+						{
+							if((lines[i + 8].split(" ", 3))[2].equals("Y"))
+							{
+								System.out.print("      ERROR: THIS DEATH WAS OVER 150 YEARS");
+							}
+							else
+							{
+								System.out.print("      ERROR: THIS PERSON CANT BE OVER 150 YEARS OLD");
+							}
+						}
+						else if((Integer.parseInt((sectionsBirthday[2].split(" ", 3))[2])) + 150 == Calendar.getInstance().get(Calendar.YEAR))
+						{
+							if((monthToInt((sectionsBirthday[2].split(" ", 3))[1])) < Calendar.getInstance().get(Calendar.MONTH))
+							{
+								if((lines[i + 8].split(" ", 3))[2].equals("Y"))
+								{
+									System.out.print("      ERROR: THIS DEATH WAS OVER 150 YEARS");
+								}
+								else
+								{
+									System.out.print("      ERROR: THIS PERSON CANT BE OVER 150 YEARS OLD");
+								}
+							}
+							else if((monthToInt((sectionsBirthday[2].split(" ", 3))[1])) == Calendar.getInstance().get(Calendar.MONTH))
+							{
+								if((Integer.parseInt((sectionsBirthday[2].split(" ", 3))[0])) <= Calendar.getInstance().get(Calendar.DATE))
+								{
+									if((lines[i + 8].split(" ", 3))[2].equals("Y"))
+									{
+										System.out.print("      ERROR: THIS DEATH WAS OVER 150 YEARS");
+									}
+									else
+									{
+										System.out.print("      ERROR: THIS PERSON CANT BE OVER 150 YEARS OLD");
+									}
+								}
+							}
+						}
 					
 						individuals.add(tempIndividual);
 					}
 					
 					if(sections[2].equals("FAM"))
 					{
-						
 						String[] sectionsHusbandsID = lines[i + 1].split(" ", 3);
 						String[] sectionsWifesID = lines[i + 2].split(" ", 3);
 						ArrayList<String> children = new ArrayList<String>();
@@ -92,8 +125,38 @@ public class main_project
 								continueLoop = false;
 							}
 						}
-					
+						
 						Family tempFamily = new Family(sections[1], sectionsHusbandsID[2], sectionsWifesID[2], children);
+						
+						// US06: Divorce can only occur before death of both spouses.
+						for(int j = 0; j < lines.length - i; j++) 
+						{
+							String[] isDiv = lines[i + j].split(" ", 3);
+							if(isDiv[1].equals("DIV"))
+							{
+								String[] divDate = lines[i + j + 1].split(" ", 3);
+								String[] divDateSec = divDate[2].split(" ", 3);
+								String[] husbandDateSec = tempFamily.getHusbandBirthDay(sectionsHusbandsID[2]).split(" ", 3);
+								String[] wifeDateSec = tempFamily.getWifeBirthDay(sectionsWifesID[2]).split(" ", 3);
+								if(!isDateAhead(husbandDateSec, divDateSec))
+								{
+									System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
+								}
+								else if(!isDateAhead(wifeDateSec, divDateSec))
+								{
+									System.out.print("      ERROR: ONE OR BOTH OF THE SPOUCES DIED BEFORE DIVORCE");
+								}
+								break;
+							}
+							else if(isDiv[1].equals("MARR"))
+							{
+								break;
+							}
+							else if(isDiv[1].equals("TRLR"))
+							{
+								break;
+							}
+						}
 					
 						families.add(tempFamily);
 					}
@@ -260,6 +323,18 @@ public class main_project
 			return "ERROR";
 		}
 		
+		String getHusbandBirthDay(String inputHusbandID)
+		{
+			for(int j = 0; j < individuals.size(); j++)
+			{
+				if(inputHusbandID.equals(individuals.get(j).getID()))
+				{
+					return individuals.get(j).getBirthday();
+				}
+			}
+			return "ERROR";
+		}
+		
 		String getWifeID()
 		{
 			return this.wifeID;
@@ -277,6 +352,18 @@ public class main_project
 			return "ERROR";
 		}
 		
+		String getWifeBirthDay(String inputWifeID)
+		{
+			for(int j = 0; j < individuals.size(); j++)
+			{
+				if(inputWifeID.equals(individuals.get(j).getID()))
+				{
+					return individuals.get(j).getBirthday();
+				}
+			}
+			return "ERROR";
+		}
+		
 		ArrayList<String> getChildren()
 		{
 			return this.children;
@@ -286,6 +373,56 @@ public class main_project
 		{
 			return "ID: " + this.ID + " Husband ID: " + this.husbandID + " Husband Name: " + getHusbandName() + " Wife ID: " + this.wifeID + " Wife Name: " + getWifeName(); //+ "-" + this.children;
 		}
+	}
+	
+	// Test if dateToBeFirst is in fact a date that comes before the dateToBeAfter
+	public static boolean isDateAhead(String[] dateToBeFirst, String[] dateToBeAfter)
+	{
+		if(Integer.parseInt(dateToBeFirst[2]) <= Integer.parseInt(dateToBeAfter[2]))
+		{
+			if(monthToInt(dateToBeFirst[1]) <= monthToInt(dateToBeAfter[1]))
+			{
+				if(Integer.parseInt(dateToBeFirst[0]) < Integer.parseInt(dateToBeAfter[0]))
+				{
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public static int monthToInt(String month)
+	{
+		switch (month) 
+		{
+            case "JAN": 
+				return 1;
+            case "FEB":  
+				return 2;
+            case "MAR": 
+				return 3;
+            case "APR":  
+				return 4;
+            case "MAY": 
+				return 5;
+            case "JUN": 
+				return 6;
+            case "JUL": 
+				return 7;
+            case "AUG":  
+				return 8;
+            case "SEP": 
+				return 9;
+            case "OCT": 
+				return 10;
+            case "NOV": 
+				return 11;
+            case "DEC": 
+				return 12;
+            default: 
+				return -1;
+        }
 	}
 }
 
