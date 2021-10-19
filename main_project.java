@@ -160,8 +160,8 @@ public class main_project
 		Scanner myObj = new Scanner(System.in);
 		System.out.print("Enter Path of GED file: ");
 		
-		//String pathName = myObj.nextLine();				
-		String pathName = "resources/Kulpin_Family.ged";
+		String pathName = myObj.nextLine();				
+		//String pathName = "resources/Kulpin_Family.ged";
 		String strOut = utils.readFile(pathName);
 		String[] lines = strOut.split("\n");
 
