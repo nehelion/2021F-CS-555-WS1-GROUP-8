@@ -94,8 +94,8 @@ public class main_project
 					j++;
 				}
 				Family fam = new Family(sections[1], husb, wife, children, marrDate, divDate);
-				System.out.println(				fam.getDivDate()
-				);
+				
+				
 				families.put(fam.getID(), fam);
 			}
 		}
@@ -106,7 +106,7 @@ public class main_project
 		List<Individual> ar = new ArrayList<Individual>(individuals.values());
 		for (int i = 0; i < ar.size(); i++) {
 			Individual ind = ar.get(i);
-			System.out.println(ind.getID() + " | " + ind.getName()+ " | "+ ind.getBirthday() +" | "+ ind.getDeathday());
+			System.out.println(ind.getID() + " | " + ind.getName());
 		}
 	}
 
@@ -117,10 +117,41 @@ public class main_project
 			Family fam = ar.get(i);
 			String wife = individuals.get(fam.getWifeID()).getName();
 			String husb = individuals.get(fam.getHusbandID()).getName();
-			System.out.println(fam.getID() + " | " + husb + " | " + wife + " | " + fam.getChildren().toString() + " | " + fam.getMarrDate() + " | " + fam.getDivDate());
+			System.out.println(fam.getID() + " | " + husb + " | " + wife + " | " + fam.getChildren().toString());
 		}
 	}
 
+	public static void runGEDFile(String file) throws Exception
+	{
+		int c = 0;
+		String valid = "N";
+		
+
+		
+		//String pathName = myObj.nextLine();				
+		String pathName = file;
+		String strOut = utils.readFile(pathName);
+		String[] lines = strOut.split("\n");
+
+		storeIndivs(lines);
+		storeFamilies(lines);
+
+		String US05 = utils.isMarriageBeforeDeath(families,individuals);
+		if(!US05.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US05);
+		}
+
+		String US06 = utils.isDivorceBeforeDeath(families,individuals);
+		if(!US06.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US06);
+		}
+
+		printIndividuals();
+		printFamilies();
+		System.out.println(errorString);
+	}
     public static void main(String[] args) throws Exception
 	{
 		int c = 0;

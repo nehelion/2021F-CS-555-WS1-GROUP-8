@@ -76,7 +76,7 @@ public class Utils {
                
                if(wDeath.before(mDate))
                {
-                  out = out.concat("ERROR: USO1 conflict with ").concat(wife_id).concat(".\n");
+                  out = out.concat("ERROR: USO5 conflict with ").concat(wife_id).concat(".\n");
                }
             }
 
@@ -87,7 +87,7 @@ public class Utils {
                
                if(hDeath.before(mDate))
                {
-                  out = out.concat("ERROR: USO1 conflict with ").concat(husb_id).concat(".\n");
+                  out = out.concat("ERROR: USO5 conflict with ").concat(husb_id).concat(".\n");
                }
             }
 
@@ -103,7 +103,6 @@ public class Utils {
     public String isDivorceBeforeDeath(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
       String out = "";
-      System.out.println("sdf");
       for(String ids : families.keySet()) {
          Family fam = families.get(ids);
 			if(fam.getWifeID() != null && fam.getHusbandID() != null && fam.getDivDate() != null)
@@ -125,7 +124,7 @@ public class Utils {
                
                if(wDeath.before(dDate))
                {
-                  out = out.concat("ERROR: USO5 conflict with ").concat(wife_id).concat(".\n");
+                  out = out.concat("ERROR: USO6 conflict with ").concat(wife_id).concat(".\n");
                }
             }
 
