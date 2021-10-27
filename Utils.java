@@ -1,9 +1,11 @@
-import java.time.format.DateTimeFormatter;  
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.text.*;  
 import java.time.LocalDateTime;    
 import java.io.*;
 import java.util.*;
 import java.util.Date;
+import java.time.*;
 
 public class Utils {
 
@@ -148,8 +150,59 @@ public class Utils {
       return out;
     }
     
-    
+    public String isThereBigamy(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+       return "hi";
+    }
 
+    public String areParentsTooOld(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+      String out = "";
+      for(String ids : families.keySet()) {
+         Family fam = families.get(ids);
+         if(!fam.getChildren().isEmpty())
+         {
+            Individual mom = individuals.get(fam.getWifeID());
+            Individual dad = individuals.get(fam.getHusbandID());
+            long momAge = getAge(mom);
+            long dadAge = getAge(dad);
+            for(String child : fam.getChildren()) {
+               Individual chilIndi = individuals.get(child);
+               long childAge = getAge(chilIndi);
+               System.out.println(momAge);
+               System.out.println(childAge);
+               if(Math.abs(momAge - childAge) > 60)
+               {
+                  out = out.concat("ERROR: US12 conflict with Mother " + mom.getName() + " (" + mom.getID() + ") being too old for child " + chilIndi.getName() + "(" + chilIndi.getID() +"). \n");
+               }
+               if(Math.abs(dadAge - childAge) > 80)
+               {
+                  out = out.concat("ERROR: US12 conflict with Father " + dad.getName() + " (" + dad.getID() + ") being too old for child " + chilIndi.getName() + "(" + chilIndi.getID() +"). \n");
+               }
+            }
+
+         }
+      }
+      if(out.length() == 0)
+      {
+         out.concat("Correct");
+      }
+      return out;
+    }
+
+    public long getAge(Individual ind)
+    {
+      String indBrithday = ind.getBirthday();
+      System.out.println(indBrithday);
+      //int firstSlashIndex = indBrithday.indexOf("/", 0);
+      int secondSlashIndex = indBrithday.indexOf("/", 5);
+      int year = Integer.parseInt(indBrithday.substring(0,4));
+      int month = Integer.parseInt(indBrithday.substring(5,secondSlashIndex));
+      int day = Integer.parseInt(indBrithday.substring(secondSlashIndex+1));
+      LocalDate start = LocalDate.of(year, month, day);
+      LocalDate now = LocalDate.now();
+      return  ChronoUnit.YEARS.between(start,now);
+    }
     public String readFile(String filePath) 
     {
         StringBuilder contentBuilder = new StringBuilder();

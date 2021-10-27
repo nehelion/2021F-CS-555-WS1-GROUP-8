@@ -148,6 +148,16 @@ public class main_project
 			errorString = errorString.concat(US06);
 		}
 
+		String US12 = utils.areParentsTooOld(families,individuals);
+		if(!US12.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US12);
+		}
+		else{
+			System.out.println("kjhvc");
+		}
+
+
 		printIndividuals();
 		printFamilies();
 		System.out.println(errorString);
@@ -178,6 +188,15 @@ public class main_project
 		if(!US06.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US06);
+		}
+
+		String US12 = utils.areParentsTooOld(families,individuals);
+		if(!US12.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US12);
+		}
+		else{
+			System.out.println("kjhvc");
 		}
 
 		printIndividuals();

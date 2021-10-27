@@ -14,14 +14,25 @@ public class tests {
 
         System.out.println("---------------");
 
-        System.out.println("Bad file");
-        String testBad = "resources/sprint1test.ged";
-	    testproj.runGEDFile(testBad);
+        System.out.println("Bad file Sprint 1");
+        String testBad1 = "resources/sprint1test.ged";
+	    testproj.runGEDFile(testBad1);
         //should produce errors for 
         /*
             @I1@ INDI for US05
             @I8@ INDI for US05
             @I8@ INDI for US06
             */
+        System.out.println("---------------");
+        System.out.println("Bad file Sprint 2");
+        String testBad2 = "resources/sprint2test.ged";
+        testproj.runGEDFile(testBad2);
+        //should produce errors for 
+        /*
+            @I1@ INDI for US05
+            @I8@ INDI for US05
+            @I8@ INDI for US06
+            */
+
     }
 }
