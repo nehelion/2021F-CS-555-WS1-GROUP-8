@@ -2,7 +2,7 @@
 
 ECHO.
 ECHO Compiling...
-javac -classpath junit-jupiter-api-5.8.1.jar "main_project.java"
+javac -classpath junit-jupiter-api-5.8.1.jar "main_project.java" "Family.java" "Individual.java" "Utils.java" "tests.java"
 ECHO done!
 ECHO.
 

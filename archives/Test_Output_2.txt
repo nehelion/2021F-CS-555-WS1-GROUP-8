@@ -1,0 +1,30 @@
+Compiling...
+done!
+
+Executing:
+
+Enter Path of GED file:
+****************************************
+                Individuals
+****************************************
+@I11@ | Maria Duebelo
+@I1@ | Jackeavich Longston
+@I3@ | Mariandel Endale
+@I2@ | Jackeavichelion Longston
+@I5@ | Iielevia Allienvir
+@I4@ | Jacke Longston
+@I7@ | Karp Longston
+@I6@ | Karpevich Longston
+@I9@ | Jaizey Longston
+@I8@ | Ghalara Rholgar
+@I10@ | Valthadeor Duebelo
+
+****************************************
+                 Families
+****************************************
+@F2@ | Jackeavichelion Longston | Mariandel Endale | [@I1@, @I6@]
+@F1@ | Jackeavich Longston | Iielevia Allienvir | [@I4@, @I9@]
+@F4@ | Karpevich Longston | Ghalara Rholgar | [@I7@]
+@F3@ | Valthadeor Duebelo | Iielevia Allienvir | [@I11@]
+
+Hit ENTER to continue...
