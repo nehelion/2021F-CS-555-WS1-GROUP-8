@@ -9,7 +9,10 @@ import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.Scanner; 
+import java.util.Scanner;
+
+import javax.lang.model.type.NullType;
+
 import java.nio.charset.StandardCharsets;
 
 public class main_project
@@ -94,7 +97,10 @@ public class main_project
 					j++;
 				}
 				Family fam = new Family(sections[1], husb, wife, children, marrDate, divDate);
-				
+				Individual dad = individuals.get(husb);
+				dad.addFams(sections[1]);
+				Individual mom = individuals.get(wife);
+				mom.addFams(sections[1]);
 				
 				families.put(fam.getID(), fam);
 			}
@@ -106,6 +112,10 @@ public class main_project
 		List<Individual> ar = new ArrayList<Individual>(individuals.values());
 		for (int i = 0; i < ar.size(); i++) {
 			Individual ind = ar.get(i);
+			for(String id : ind.getFams())
+			{
+				System.out.print(id + " ");
+			}
 			System.out.println(ind.getID() + " | " + ind.getName());
 		}
 	}
@@ -153,9 +163,13 @@ public class main_project
 		{
 			errorString = errorString.concat(US12);
 		}
-		else{
-			System.out.println("kjhvc");
+
+		String US18 = utils.areSibilingsMarried(families,individuals);
+		if(!US18.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US18);
 		}
+		
 
 
 		printIndividuals();
@@ -195,13 +209,14 @@ public class main_project
 		{
 			errorString = errorString.concat(US12);
 		}
-		else{
-			System.out.println("kjhvc");
-		}
+		
 
 		printIndividuals();
 		printFamilies();
 		System.out.println(errorString);
+		errorString = null;
+		individuals.clear();
+		families.clear();
 		/*for(int i = 0; i < lines.length; i++)
 		{
 			System.out.println("--> " + lines[i]); 

@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class tests {
+public class sprint2Test {
     public static void main(String[] args) throws Exception
 	{
         System.out.println("Good file");
@@ -14,24 +14,13 @@ public class tests {
 
         System.out.println("---------------");
         
-		main_project testproj = new main_project();
-        System.out.println("Bad file Sprint 1");
-        String testBad1 = "resources/sprint1test.ged";
-	    testproj.runGEDFile(testBad1);
-        //should produce errors for 
-        /*
-            @I1@ INDI for US05
-            @I8@ INDI for US05
-            @I8@ INDI for US06
-            */
-        System.out.println("---------------");
         System.out.println("Bad file Sprint 2");
-        String testBad2 = "resources/sprint2test.ged";
-        main_project testproj2 = new main_project();
-        testproj2.runGEDFile(testBad2);
+        String testBad = "resources/sprint2test.ged";
+        main_project testproj = new main_project();
+        testproj.runGEDFile(testBad);
         //should produce errors for 
         /*
-            @I1@ INDI for US05
+            @I11@ INDI for US12
             @I8@ INDI for US05
             @I8@ INDI for US06
             */

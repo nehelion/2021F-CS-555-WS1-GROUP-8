@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Individual
 {
@@ -7,6 +8,7 @@ public class Individual
     private String gender;
     private String birthday;
     private String deathday;
+    private ArrayList<String> famIds = new ArrayList<>();
     
     public Individual(String ID, String name, String gender, String birthday, String deathday)
     {
@@ -40,6 +42,16 @@ public class Individual
     String getDeathday()
     {
         return this.deathday;
+    }
+
+    void addFams(String id)
+    {
+        famIds.add(id);
+    }
+
+    ArrayList<String> getFams()
+    {
+        return this.famIds;
     }
     
     

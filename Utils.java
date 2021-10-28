@@ -152,8 +152,35 @@ public class Utils {
     
     public String isThereBigamy(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
-       return "hi";
-    }
+      String out = "";
+      for(String ids : individuals.keySet())
+      {
+         Individual indi = individuals.get(ids);
+         ArrayList<String> fams = indi.getFams();
+         int spot = 0;
+         if(fams != null && fams.size() > 1)
+         {
+            String firstFam = fams.get(spot);
+            String marrDate = families.get(firstFam).getMarrDate();
+            String divDate = families.get(firstFam).getDivDate();
+            SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd");
+            for( int i = spot+1; i < fams.size(); i++)
+            {
+               if(indi.getGender().equalsIgnoreCase("M"))
+               {
+                  String tempMarrDate = families.get(fams.get((i))).getMarrDate();
+                  if(divDate != null)
+                  {
+                     Date dDate = tf.parse(divDate);
+                     Date tmDate = tf.parse(divDate);
+
+                  }
+               }
+            }
+         }
+      }
+      return "hi";
+   }
 
     public String areParentsTooOld(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
@@ -162,15 +189,15 @@ public class Utils {
          Family fam = families.get(ids);
          if(!fam.getChildren().isEmpty())
          {
+            System.out.println(fam.getID());
             Individual mom = individuals.get(fam.getWifeID());
             Individual dad = individuals.get(fam.getHusbandID());
             long momAge = getAge(mom);
             long dadAge = getAge(dad);
             for(String child : fam.getChildren()) {
+               System.out.println(child);
                Individual chilIndi = individuals.get(child);
                long childAge = getAge(chilIndi);
-               System.out.println(momAge);
-               System.out.println(childAge);
                if(Math.abs(momAge - childAge) > 60)
                {
                   out = out.concat("ERROR: US12 conflict with Mother " + mom.getName() + " (" + mom.getID() + ") being too old for child " + chilIndi.getName() + "(" + chilIndi.getID() +"). \n");
@@ -190,11 +217,38 @@ public class Utils {
       return out;
     }
 
+    public String areSibilingsMarried(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+      String out = "";
+      for(Family fam : families.values())
+      {
+         String famId = fam.getID();
+         if(fam.getChildren().size() > 1)
+         {
+            ArrayList<String> children = fam.getChildren();
+            for(Family tempFam : families.values())
+            {
+               String tempFamId = tempFam.getID();
+               String wife = tempFam.getWifeID();
+               String husb = tempFam.getHusbandID();
+               if(children.contains(husb) && children.contains(wife))
+               {
+                  out = out + "ERROR: US18 conflict with Familey " + tempFamId + ".  " + individuals.get(wife).getName() + wife + " and " + individuals.get(husb).getName() + husb + " are sibilings and married. \n";
+               }
+
+            }
+         }
+      }
+      if(out.length() == 0)
+      {
+         out.concat("Correct");
+      }
+      return out;
+    }
+
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();
-      System.out.println(indBrithday);
-      //int firstSlashIndex = indBrithday.indexOf("/", 0);
       int secondSlashIndex = indBrithday.indexOf("/", 5);
       int year = Integer.parseInt(indBrithday.substring(0,4));
       int month = Integer.parseInt(indBrithday.substring(5,secondSlashIndex));
