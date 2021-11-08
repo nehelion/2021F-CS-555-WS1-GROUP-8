@@ -169,6 +169,12 @@ public class main_project
 		{
 			errorString = errorString.concat(US06);
 		}
+		
+		String US09 = utils.birthBeforeParentDeath(families,individuals);
+		if(!US04.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US09);
+		}
 
 		String US12 = utils.areParentsTooOld(families,individuals);
 		if(!US12.equalsIgnoreCase("CORRECT"))

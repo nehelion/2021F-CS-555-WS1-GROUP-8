@@ -308,6 +308,79 @@ public class Utils {
 		return out;
     }
 	
+	public String birthBeforeParentDeath(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			for(String chil : fam.getChildren())
+			{
+				Individual child = null;
+				Individual mother = null;
+				Individual father = null;
+				
+				for(Individual ind : individuals.values())
+				{
+					if(ind.getID().equals(chil))
+					{
+						child = ind;
+					}
+					if(ind.getID().equals(fam.getHusbandID()))
+					{
+						mother = ind;
+					}
+					if(ind.getID().equals(fam.getWifeID()))
+					{
+						father = ind;
+					}
+				}
+				
+				if(mother.getDeathday() != null || father.getDeathday() != null)
+				{
+					String[] childBirthDaySects = child.getBirthday().split("/");
+					
+					if(mother.getDeathday() != null)
+					{
+						String[] motherDeathDaySects = mother.getDeathday().split("/");
+						if(Integer.parseInt(childBirthDaySects[0]) > Integer.parseInt(motherDeathDaySects[0]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after mothers death year (" + mother.getDeathday() + ") \n";
+						}
+						else if(Integer.parseInt(childBirthDaySects[1]) > Integer.parseInt(motherDeathDaySects[1]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after mothers death year/month (" + mother.getDeathday() + ") \n";
+						}
+						else if(Integer.parseInt(childBirthDaySects[2]) > Integer.parseInt(motherDeathDaySects[2]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after mothers death year/month/day (" + mother.getDeathday() + ") \n";
+						}
+					}
+					if(father.getDeathday() != null)
+					{
+						String[] fatherDeathDaySects = father.getDeathday().split("/");
+						if(Integer.parseInt(childBirthDaySects[0]) > Integer.parseInt(fatherDeathDaySects[0]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after fathers death year (" + father.getDeathday() + ") \n";
+						}
+						else if(Integer.parseInt(childBirthDaySects[1]) > Integer.parseInt(fatherDeathDaySects[1]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after fathers death year/month (" + father.getDeathday() + ") \n";
+						}
+						else if(Integer.parseInt(childBirthDaySects[2]) > Integer.parseInt(fatherDeathDaySects[2]))
+						{
+							out = out + "ERROR: US09 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") after fathers death year/month/day (" + father.getDeathday() + ") \n";
+						}
+					}
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();
