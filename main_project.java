@@ -145,6 +145,12 @@ public class main_project
 
 		storeIndivs(lines);
 		storeFamilies(lines);
+		
+		String US03 = utils.bornBeforeDead(individuals);
+		if(!US03.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US03);
+		}
 
 		String US05 = utils.isMarriageBeforeDeath(families,individuals);
 		if(!US05.equalsIgnoreCase("CORRECT"))

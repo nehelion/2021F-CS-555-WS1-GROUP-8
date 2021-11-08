@@ -8,7 +8,7 @@ ECHO.
 
 ECHO Executing:
 ECHO.
-java main_project
+java tests
 
 set /p DUMMY=Hit ENTER to continue...
 

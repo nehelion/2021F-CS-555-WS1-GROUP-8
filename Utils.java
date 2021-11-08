@@ -233,7 +233,7 @@ public class Utils {
                String husb = tempFam.getHusbandID();
                if(children.contains(husb) && children.contains(wife))
                {
-                  out = out + "ERROR: US18 conflict with Familey " + tempFamId + ".  " + individuals.get(wife).getName() + wife + " and " + individuals.get(husb).getName() + husb + " are sibilings and married. \n";
+                  out = out + "ERROR: US18 conflict with Family " + tempFamId + ".  " + individuals.get(wife).getName() + wife + " and " + individuals.get(husb).getName() + husb + " are sibilings and married. \n";
                }
 
             }
@@ -245,7 +245,38 @@ public class Utils {
       }
       return out;
     }
-
+	
+	public String bornBeforeDead(Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Individual ind : individuals.values())
+		{
+			if(ind.getDeathday() != null)
+			{
+				String[] deathDaySects = ind.getDeathday().split("/");
+				String[] birthDaySects = ind.getBirthday().split("/");
+				
+				if(Integer.parseInt(birthDaySects[0]) > Integer.parseInt(deathDaySects[0]))
+				{
+					out = out + "ERROR: US03 conflict with Individual " + ind.getName() + " death year (" + ind.getDeathday() + ") before birth year (" + ind.getBirthday() + ") \n";
+				}
+				else if(Integer.parseInt(birthDaySects[1]) > Integer.parseInt(deathDaySects[1]))
+				{
+					out = out + "ERROR: US03 conflict with Individual " + ind.getName() + " death year/month (" + ind.getDeathday() + ") before birth year/month (" + ind.getBirthday() + ") \n";
+				}
+				else if(Integer.parseInt(birthDaySects[2]) > Integer.parseInt(deathDaySects[2]))
+				{
+					out = out + "ERROR: US03 conflict with Individual " + ind.getName() + " death year/month/day (" + ind.getDeathday() + ") before birth year/month/day (" + ind.getBirthday() + ") \n";
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();
