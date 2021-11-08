@@ -277,6 +277,37 @@ public class Utils {
 		return out;
     }
 	
+	public String marriageBeforeDevorce(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			if(fam.getDivDate() != null)
+			{
+				String[] marrDaySects = fam.getMarrDate().split("/");
+				String[] divDaySects = fam.getDivDate().split("/");
+				
+				if(Integer.parseInt(marrDaySects[0]) > Integer.parseInt(divDaySects[0]))
+				{
+					out = out + "ERROR: US04 conflict with Family " + fam.getID() + " divorce year (" + fam.getDivDate() + ") before marriage year (" + fam.getMarrDate() + ") \n";
+				}
+				else if(Integer.parseInt(marrDaySects[1]) > Integer.parseInt(divDaySects[1]))
+				{
+					out = out + "ERROR: US04 conflict with Family " + fam.getID() + " divorce year/month (" + fam.getDivDate() + ") before marriage year/month (" + fam.getMarrDate() + ") \n";
+				}
+				else if(Integer.parseInt(marrDaySects[2]) > Integer.parseInt(divDaySects[2]))
+				{
+					out = out + "ERROR: US04 conflict with Family " + fam.getID() + " divorce year/month/day (" + fam.getDivDate() + ") before marriage year/month/day (" + fam.getMarrDate() + ") \n";
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();

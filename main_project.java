@@ -151,6 +151,12 @@ public class main_project
 		{
 			errorString = errorString.concat(US03);
 		}
+		
+		String US04 = utils.marriageBeforeDevorce(families,individuals);
+		if(!US04.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US04);
+		}
 
 		String US05 = utils.isMarriageBeforeDeath(families,individuals);
 		if(!US05.equalsIgnoreCase("CORRECT"))
