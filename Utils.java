@@ -381,6 +381,66 @@ public class Utils {
 		return out;
     }
 	
+	public String marriageAfterFourteen(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			Individual mother = null;
+			Individual father = null;
+			
+			for(Individual ind : individuals.values())
+			{
+				if(ind.getID().equals(fam.getHusbandID()))
+				{
+					mother = ind;
+				}
+				if(ind.getID().equals(fam.getWifeID()))
+				{
+					father = ind;
+				}
+			}
+			
+			String[] marrDaySects = fam.getMarrDate().split("/");
+			String[] motherBirthDaySects = mother.getBirthday().split("/");
+			String[] fatherBirthDaySects = father.getBirthday().split("/");
+			
+			int motherAgeAtMarriage = Integer.parseInt(marrDaySects[0]) - Integer.parseInt(motherBirthDaySects[0]) - 1;
+			int fatherAgeAtMarriage = Integer.parseInt(marrDaySects[0]) - Integer.parseInt(fatherBirthDaySects[0]) - 1;
+			
+			if(Integer.parseInt(marrDaySects[1]) > Integer.parseInt(motherBirthDaySects[1]))
+			{
+				if(Integer.parseInt(marrDaySects[2]) > Integer.parseInt(motherBirthDaySects[2]))
+				{
+					motherAgeAtMarriage++;
+				}
+			}
+			
+			if(Integer.parseInt(marrDaySects[1]) > Integer.parseInt(fatherBirthDaySects[1]))
+			{
+				if(Integer.parseInt(marrDaySects[2]) > Integer.parseInt(fatherBirthDaySects[2]))
+				{
+					fatherAgeAtMarriage++;
+				}
+			}
+			
+			if(motherAgeAtMarriage <= 14)
+			{
+				out = out + "ERROR: US10 conflict with Family " + fam.getID() + ", Mother got married at age " + motherAgeAtMarriage + " \n";
+			}
+			
+			if(fatherAgeAtMarriage <= 14)
+			{
+				out = out + "ERROR: US10 conflict with Family " + fam.getID() + ", Father got married at age " + fatherAgeAtMarriage + " \n";
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();
@@ -390,8 +450,9 @@ public class Utils {
       int day = Integer.parseInt(indBrithday.substring(secondSlashIndex+1));
       LocalDate start = LocalDate.of(year, month, day);
       LocalDate now = LocalDate.now();
-      return  ChronoUnit.YEARS.between(start,now);
+      return ChronoUnit.YEARS.between(start,now);
     }
+	
     public String readFile(String filePath) 
     {
         StringBuilder contentBuilder = new StringBuilder();

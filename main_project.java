@@ -171,9 +171,15 @@ public class main_project
 		}
 		
 		String US09 = utils.birthBeforeParentDeath(families,individuals);
-		if(!US04.equalsIgnoreCase("CORRECT"))
+		if(!US09.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US09);
+		}
+		
+		String US10 = utils.marriageAfterFourteen(families,individuals);
+		if(!US10.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US10);
 		}
 
 		String US12 = utils.areParentsTooOld(families,individuals);
