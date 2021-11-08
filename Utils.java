@@ -50,9 +50,49 @@ public class Utils {
         }
 	}
 
-    public boolean isDeathInFuture(String date) {
-        System.out.println(today);
-        return false;
+    public String isDeathInFuture(Map<String, Individual> individuals) throws Exception {
+       String out = "";
+       for (String id : individuals.keySet()) {
+          Individual indiv = individuals.get(id);
+          if (indiv.getDeathday() == null) continue;
+
+          String death = indiv.getDeathday();
+
+          SimpleDateFormat formatter = new SimpleDateFormat("yyyy/M/dd", Locale.ENGLISH);
+          Date deathdate = formatter.parse(death);
+
+          Date now = new Date();
+          if (now.before(deathdate)) {
+             out += "ERROR: US01 conflict with " + indiv.getID() + "\n";
+          } else {
+             out += "Correct\n";
+          }
+       }
+       return out;
+    }
+
+    public String isDeathBeforeBirth(Map<String, Individual> individuals) throws Exception {
+       String out = "";
+      for (String id : individuals.keySet()) {
+         Individual indiv = individuals.get(id);
+         if (indiv.getID() == null) continue;
+
+         String birth = indiv.getBirthday();
+         String death = indiv.getDeathday();
+
+         if (death == null) continue;
+
+         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/M/dd", Locale.ENGLISH);
+
+         Date birthdate = formatter.parse(birth);
+         Date deathdate = formatter.parse(death);
+
+         if (deathdate.before(birthdate)) {
+            out += "ERROR: US03 conflict with " + indiv.getID() + "\n";
+         }
+         out += "Correct\n";
+      }
+      return out;
     }
 
     public String isMarriageBeforeDeath(Map<String, Family> families, Map<String, Individual> individuals) throws Exception

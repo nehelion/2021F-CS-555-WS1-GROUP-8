@@ -145,6 +145,18 @@ public class main_project
 
 		storeIndivs(lines);
 		storeFamilies(lines);
+
+		String US01 = utils.isDeathInFuture(individuals);
+		if(!US01.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US01);
+		}
+
+		String US02 = utils.isDeathBeforeBirth(individuals);
+		if(!US02.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US02);
+		}
 		
 		String US03 = utils.bornBeforeDead(individuals);
 		if(!US03.equalsIgnoreCase("CORRECT"))
@@ -202,6 +214,7 @@ public class main_project
 	}
     public static void main(String[] args) throws Exception
 	{
+
 		int c = 0;
 		String valid = "N";
 		
