@@ -155,6 +155,9 @@ public class Utils {
 				Individual temp_wife = individuals.get(wife_id);
 				Individual temp_husb = individuals.get(husb_id);
             String divDate = fam.getDivDate();
+            if (divDate.equals("")) {
+               continue;
+            }
             String husb_death = temp_husb.getDeathday();
             String wife_death = temp_wife.getDeathday();
             SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd");
@@ -326,6 +329,10 @@ public class Utils {
 			{
 				String[] marrDaySects = fam.getMarrDate().split("/");
 				String[] divDaySects = fam.getDivDate().split("/");
+
+            if (divDaySects.length == 1) {
+               continue;
+            }
 				
 				if(Integer.parseInt(marrDaySects[0]) > Integer.parseInt(divDaySects[0]))
 				{
