@@ -226,6 +226,7 @@ public class Utils {
       return "hi";
    }
 
+	// US12
     public String areParentsTooOld(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
       String out = "";
@@ -261,6 +262,7 @@ public class Utils {
       return out;
     }
 	
+	// US15
 	public String tooManyChildren(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
 		String out = "";
@@ -277,7 +279,47 @@ public class Utils {
 		}
 		return out;
     }
+	
+	// US16
+	public String maleLastName(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			if(fam.getDivDate() != null)
+			{
+				Individual mother = null;
+				Individual father = null;
+				
+				for(Individual ind : individuals.values())
+				{
+					if(ind.getID().equals(fam.getHusbandID()))
+					{
+						father = ind;
+					}
+					if(ind.getID().equals(fam.getWifeID()))
+					{
+						mother = ind;
+					}
+				}
+				
+				String[] fatherSplit = father.getName().split(" ");
+				String[] motherSplit = mother.getName().split(" ");
+				
+				if(!motherSplit[1].equals(fatherSplit[1]))
+				{
+					out = out + "ERROR: US16 conflict with Mother in Family " + fam.getID() + ".  " + father.getName() + " and " + mother.getName() + " don't have the same last name. \n";
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
 
+	// US18
     public String areSibilingsMarried(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
       String out = "";
@@ -307,6 +349,7 @@ public class Utils {
       return out;
     }
 	
+	// US03
 	public String bornBeforeDead(Map<String, Individual> individuals) throws Exception
     {
 		String out = "";
@@ -338,6 +381,7 @@ public class Utils {
 		return out;
     }
 	
+	// US04
 	public String marriageBeforeDevorce(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
 		String out = "";
@@ -373,6 +417,7 @@ public class Utils {
 		return out;
     }
 	
+	// US09
 	public String birthBeforeParentDeath(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
 		String out = "";
@@ -446,6 +491,7 @@ public class Utils {
 		return out;
     }
 	
+	// US10
 	public String marriageAfterFourteen(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
 		String out = "";

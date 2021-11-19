@@ -234,6 +234,12 @@ public class main_project
 		{
 			errorString = errorString.concat(US15);
 		}
+		
+		String US16 = utils.maleLastName(families,individuals);
+		if(!US16.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US16);
+		}
 
 		String US18 = utils.areSibilingsMarried(families,individuals);
 		if(!US18.equalsIgnoreCase("CORRECT"))
