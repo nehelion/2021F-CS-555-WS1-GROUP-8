@@ -9,7 +9,6 @@ import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.Scanner;
 
 import javax.lang.model.type.NullType;
 
@@ -86,19 +85,30 @@ public class main_project
 		String id = "";
 		String husband = "";
 		String wife = "";
-		ArrayList<String> children = new ArrayList<String>();
+		List<String> children = new ArrayList<String>();
 		String married = "";
 		String divorced = "";
 		for (int i = 0; i < lines.length; i++) {
 			if (lines[i].contains("@ FAM") && !record) record = true;
 			else if ((lines[i].contains("@ FAM") && record) || (i == lines.length - 1)) {
-				Family fam = new Family(id, husband, wife, children, married, divorced);
+				
+				
+				List<String> storeChildren = new ArrayList<String>();
+				for (String string : children) {
+					storeChildren.add(string);
+								}
+				Family fam = new Family(id, husband, wife, storeChildren, married, divorced);
 				Individual dad = individuals.get(husband);
 				dad.addFams(id);
 				Individual mom = individuals.get(wife);
 				mom.addFams(id);
-				
-				families.put(fam.getID(), fam);		
+				//fam.setChildren(children);
+
+				families.put(fam.getID(), fam);	
+				// for (String string : children) {
+				// 	System.out.println(string);
+				// } 
+				// System.out.println(" tt ");	
 				children.clear();		
 			}
 			if (record) {
@@ -139,6 +149,7 @@ public class main_project
 					divDate += div_secs[0];
 					divorced = divDate;
 				}
+				
 			}
 		}
 	}
@@ -175,6 +186,7 @@ public class main_project
 		storeIndivs(lines);
 		storeFamilies(lines);
 
+		
 		String US01 = utils.isDeathInFuture(individuals);
 		if(!US01.equalsIgnoreCase("CORRECT"))
 		{
@@ -216,7 +228,7 @@ public class main_project
 		{
 			errorString = errorString.concat(US09);
 		}
-		
+	
 		String US10 = utils.marriageAfterFourteen(families,individuals);
 		if(!US10.equalsIgnoreCase("CORRECT"))
 		{
@@ -234,7 +246,7 @@ public class main_project
 		{
 			errorString = errorString.concat(US15);
 		}
-		
+	
 		String US16 = utils.maleLastName(families,individuals);
 		if(!US16.equalsIgnoreCase("CORRECT"))
 		{
@@ -245,6 +257,18 @@ public class main_project
 		if(!US18.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US18);
+		}
+
+		String US17 = utils.noMarriageToDecendents(families,individuals);
+		if(!US17.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US17);
+		}
+		
+		String US23 = utils.uniqueNamesandBirthdays(families,individuals);
+		if(!US23.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US23);
 		}
 
 		printIndividuals();

@@ -6,11 +6,11 @@ public class Family
     private String ID;
     private String husbandID;
     private String wifeID;
-    private ArrayList<String> children;
+    private List<String> children;
     private String marrDate;
     private String divDate;
     
-    public Family(String ID, String husbandID, String wifeID, ArrayList<String> children, String marrDate, String divDate)
+    public Family(String ID, String husbandID, String wifeID, List<String> children, String marrDate, String divDate)
     {
         this.ID = ID;
         this.husbandID = husbandID;
@@ -20,6 +20,12 @@ public class Family
         this.divDate = divDate;
     }
     
+
+    void addChildren(String child)
+    {
+        this.children.add(child);
+    }
+
     String getID()
     {
         return this.ID;
@@ -91,7 +97,7 @@ public class Family
     //     return "ERROR";
     // }
     
-    ArrayList<String> getChildren()
+    List<String> getChildren()
     {
         return this.children;
     }

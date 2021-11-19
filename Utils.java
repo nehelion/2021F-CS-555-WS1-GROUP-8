@@ -328,7 +328,7 @@ public class Utils {
          String famId = fam.getID();
          if(fam.getChildren().size() > 1)
          {
-            ArrayList<String> children = fam.getChildren();
+            List<String> children = fam.getChildren();
             for(Family tempFam : families.values())
             {
                String tempFamId = tempFam.getID();
@@ -445,7 +445,7 @@ public class Utils {
 					}
 				}
 				
-				if(mother.getDeathday() != null || father.getDeathday() != null)
+				if((mother.getDeathday() != null || father.getDeathday() != null))
 				{
 					String[] childBirthDaySects = child.getBirthday().split("/");
 					
@@ -558,24 +558,73 @@ public class Utils {
       String out = "";
       for(Family fam : families.values())
       {
-         String famId = fam.getID();
-         if(fam.getChildren().size() > 1)
+
+         if(!fam.getChildren().isEmpty())
          {
+         
             Individual mom = individuals.get(fam.getWifeID());
             Individual dad = individuals.get(fam.getHusbandID());
             List<Individual> children = new ArrayList<>();
             for (String child : fam.getChildren()) {
                children.add(individuals.get(child));
             }
-            for (Individual individual : children) {
-               
+            for (Individual c : children) {
+
+               for (String id : c.getFams()) {
+
+                  if(families.get(id).getHusbandID() != null && families.get(id).getWifeID() != null)
+                  {
+                     if(mom.getID().equals(families.get(id).getWifeID()))
+                     {
+                        out += "ERROR: US17 conflict with Family " + id + " " + mom.getID() + " is married to decendent " + c.getID() + ".\n";
+                     }
+                     if(dad.getID().equals(families.get(id).getHusbandID()))
+                     {
+                        out += "ERROR: US17 conflict with Family " + id + " " + dad.getID() + " is married to decendent " + c.getID() + ".\n";
+                     }
+                     // if(!families.get(id).getChildren().isEmpty())
+                     // {
+                     //    for (Individual individual : children) {
+                           
+                     //    }
+                     // }
+                  }
+               }
             }
 
          }
       }
-      return "hi";
-    } 
-	
+      if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+
+    public String uniqueNamesandBirthdays(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+      String out = "";
+      for (Individual indi : individuals.values()) {
+         String id = indi.getID();
+         String birthday = indi.getBirthday();
+         String name = indi.getName();
+         for (Individual person2 : individuals.values()) {
+            if(!id.equals(person2.getID()))
+            {
+               if(birthday.equals(person2.getBirthday()) && name.equals(person2.getName()))
+               {
+                  out += "ERROR: US23 conflict with Person " + id +  " has same name and birthday as person " + person2.getID() + ".\n";
+               }
+            }
+         }
+      }
+      if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();
