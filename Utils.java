@@ -489,6 +489,29 @@ public class Utils {
 		}
 		return out;
     }
+
+    public String noMarriageToDecendents(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+      String out = "";
+      for(Family fam : families.values())
+      {
+         String famId = fam.getID();
+         if(fam.getChildren().size() > 1)
+         {
+            Individual mom = individuals.get(fam.getWifeID());
+            Individual dad = individuals.get(fam.getHusbandID());
+            List<Individual> children = new ArrayList<>();
+            for (String child : fam.getChildren()) {
+               children.add(individuals.get(child));
+            }
+            for (Individual individual : children) {
+               
+            }
+
+         }
+      }
+      return "hi";
+    } 
 	
     public long getAge(Individual ind)
     {
