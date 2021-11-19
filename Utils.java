@@ -260,6 +260,23 @@ public class Utils {
       }
       return out;
     }
+	
+	public String tooManyChildren(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			if(fam.getChildren().size() > 15)
+			{
+				out = out.concat("ERROR: US15 conflict with Family " + fam.getID() + ", has more than 15 children.\n");
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
 
     public String areSibilingsMarried(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
