@@ -187,17 +187,17 @@ public class main_project
 		storeFamilies(lines);
 
 		
-		String US01 = utils.isDeathInFuture(individuals);
-		if(!US01.equalsIgnoreCase("CORRECT"))
-		{
-			errorString = errorString.concat(US01);
-		}
+		// String US01 = utils.isDeathInFuture(individuals);
+		// if(!US01.equalsIgnoreCase("CORRECT"))
+		// {
+		// 	errorString = errorString.concat(US01);
+		// }
 
-		String US02 = utils.isDeathBeforeBirth(individuals);
-		if(!US02.equalsIgnoreCase("CORRECT"))
-		{
-			errorString = errorString.concat(US02);
-		}
+		// String US02 = utils.isDeathBeforeBirth(individuals);
+		// if(!US02.equalsIgnoreCase("CORRECT"))
+		// {
+		// 	errorString = errorString.concat(US02);
+		// }
 		
 		String US03 = utils.bornBeforeDead(individuals);
 		if(!US03.equalsIgnoreCase("CORRECT"))
