@@ -197,33 +197,106 @@ public class Utils {
     public String isThereBigamy(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
       String out = "";
-      for(String ids : individuals.keySet())
+      for(Family fam : families.values())
       {
-         Individual indi = individuals.get(ids);
-         ArrayList<String> fams = indi.getFams();
-         int spot = 0;
-         if(fams != null && fams.size() > 1)
+         String wife_id = fam.getWifeID();
+			String husb_id = fam.getHusbandID();
+			Individual temp_wife = individuals.get(wife_id);
+			Individual temp_husb = individuals.get(husb_id);
+         String divDate = fam.getDivDate();
+         String marDate = fam.getMarrDate();
+         String fID = fam.getID();
+         SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd");
+         Date mDate = tf.parse(marDate);
+         Date dDate = null;
+         if(!divDate.equalsIgnoreCase(""))
          {
-            String firstFam = fams.get(spot);
-            String marrDate = families.get(firstFam).getMarrDate();
-            String divDate = families.get(firstFam).getDivDate();
-            SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd");
-            for( int i = spot+1; i < fams.size(); i++)
-            {
-               if(indi.getGender().equalsIgnoreCase("M"))
-               {
-                  String tempMarrDate = families.get(fams.get((i))).getMarrDate();
-                  if(divDate != null)
-                  {
-                     Date dDate = tf.parse(divDate);
-                     Date tmDate = tf.parse(divDate);
+            dDate = tf.parse(divDate);
+         }
 
+         for(Family fam2 : families.values())
+         {
+            if(!fID.equalsIgnoreCase(fam2.getID()))
+            {
+               String wife_id2 = fam2.getWifeID();
+			      String husb_id2 = fam2.getHusbandID();
+			      Individual temp_wife2 = individuals.get(wife_id2);
+			      Individual temp_husb2 = individuals.get(husb_id2);
+               String divDate2 = fam2.getDivDate();
+               String marDate2 = fam2.getMarrDate();
+               String fID2 = fam2.getID();
+               Date mDate2 = tf.parse(marDate2);
+               Date dDate2 = null;
+               int spot = 0;
+               if(wife_id.equalsIgnoreCase(wife_id2)){
+                  spot = 1;
+               }
+               else if(husb_id.equalsIgnoreCase(husb_id2))
+               {
+                  spot = 2;
+               }
+               else
+               {
+                  spot = 0;
+               }
+
+               if(!divDate2.equalsIgnoreCase(""))
+               {
+                  dDate2 = tf.parse(divDate2);
+               }
+
+               if(spot != 0){
+
+                  
+                  if(dDate == null && dDate2 != null)
+                  {
+                     if(mDate.before(dDate2))
+                     {
+                        if(spot == 1)
+                        {
+                           out += "ERROR US11: There is bigamy with spouse " + wife_id + " " + temp_wife2.getName() + " in families " + fID + " and " + fID2 +".\n";
+                        }
+                        else{
+                           out += "ERROR US11: There is bigamy with spouse " + husb_id + " " + temp_husb2.getName() + " in families " + fID + " and " + fID2 +".\n";
+
+                        }
+                     }  
+                  }
+                  else if(dDate != null && dDate2 == null)
+                  {
+                     if(mDate2.before(dDate))
+                     {
+                        if(spot == 1)
+                        {
+                           out += "ERROR US11: There is bigamy with spouse " + wife_id + " " + temp_wife2.getName() + " in families " + fID + " and " + fID2 +".\n";
+                        }
+                        else{
+                           out += "ERROR US11: There is bigamy with spouse " + husb_id + " " + temp_husb2.getName() + " in families " + fID + " and " + fID2 +".\n";
+
+                        }
+                     }
+                  }
+                  else
+                  {
+                     if(spot == 1)
+                     {
+                        out += "ERROR US11: There is bigamy with spouse " + wife_id + " " + temp_wife2.getName() + " in families " + fID + " and " + fID2 +".\n";
+                     }
+                     else{
+                        out += "ERROR US11: There is bigamy with spouse " + husb_id + " " + temp_husb2.getName() + " in families " + fID + " and " + fID2 +".\n";
+
+                     }
                   }
                }
             }
+            
          }
       }
-      return "hi";
+      if(out.length() == 0)
+      {
+         out.concat("Correct");
+      }
+      return out;
    }
 
 	// US12

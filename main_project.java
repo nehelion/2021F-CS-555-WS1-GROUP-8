@@ -277,6 +277,12 @@ public class main_project
 			errorString = errorString.concat(US24);
 		}
 
+		String US11 = utils.isThereBigamy(families,individuals);
+		if(!US11.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US11);
+		}
+
 		printIndividuals();
 		printFamilies();
 		System.out.println(errorString);
