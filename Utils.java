@@ -625,6 +625,38 @@ public class Utils {
 		return out;
     }
 
+    public String uniqueFamsBySpouse(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+      String out ="";
+      for (Family fam_Main : families.values()) {
+         String husb_name = individuals.get(fam_Main.getHusbandID()).getName();
+         String wife_name = individuals.get(fam_Main.getWifeID()).getName();
+         String mDate = fam_Main.getMarrDate();
+         for (Family fam2 : families.values()) {
+            String hName2 = individuals.get(fam2.getHusbandID()).getName();
+            String wName2 = individuals.get(fam2.getWifeID()).getName();
+            String mDate2 = fam2.getMarrDate();
+            if(!fam2.getID().equalsIgnoreCase(fam_Main.getID()))
+            {
+               if(hName2.equalsIgnoreCase(husb_name) && mDate.equalsIgnoreCase(mDate2))
+               {
+                  out += "ERRROR WITH US24: Families with IDs " + fam2.getID() + " and " + fam_Main.getID() + " have same spouse and marriage date being " + husb_name + " on " + mDate + ".\n";
+               }
+               if(wName2.equalsIgnoreCase(wife_name) && mDate.equalsIgnoreCase(mDate2))
+               {
+                  out += "ERRROR WITH US24: Families with IDs " + fam2.getID() + " and " + fam_Main.getID() + " have same spouse and marriage date being " + wife_name + " on " + mDate + ".\n";
+               }
+            }
+         }
+          
+      }
+      if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+
     public long getAge(Individual ind)
     {
       String indBrithday = ind.getBirthday();

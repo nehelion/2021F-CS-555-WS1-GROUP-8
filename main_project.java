@@ -271,6 +271,12 @@ public class main_project
 			errorString = errorString.concat(US23);
 		}
 
+		String US24 = utils.uniqueFamsBySpouse(families,individuals);
+		if(!US24.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US24);
+		}
+
 		printIndividuals();
 		printFamilies();
 		System.out.println(errorString);
