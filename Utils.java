@@ -431,6 +431,61 @@ public class Utils {
 		}
 		return out;
     }	
+	
+	// US20
+	public String noUncleAuntMarryingNephew(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		List<String> uncleAunts = new ArrayList<String>();
+		
+		for(Family fam : families.values())
+		{
+			Individual mother = null;
+			Individual father = null;
+			List<String> children = fam.getChildren();
+			
+			for(Individual ind : individuals.values())
+			{
+				if(ind.getID().equals(fam.getHusbandID()))
+				{
+					father = ind;
+				}
+				if(ind.getID().equals(fam.getWifeID()))
+				{
+					mother = ind;
+				}
+			}
+			
+			for(Family fam_second : families.values())
+			{
+				if(fam_second.getChildren().contains(father.getID()) || fam_second.getChildren().contains(mother.getID()))
+				{
+					for(String chil : fam_second.getChildren())
+					{
+						uncleAunts.add(chil);
+					}
+				}
+			}
+			
+			for(Family tempFam : families.values())
+			{
+				if((uncleAunts.contains(tempFam.getHusbandID()) && children.contains(tempFam.getWifeID())) || 
+				   (uncleAunts.contains(tempFam.getWifeID()) && children.contains(tempFam.getHusbandID())))
+				{
+					out = out + "ERROR: US20 conflict with Family " + tempFam.getID() + ".  " 
+							+ individuals.get(tempFam.getWifeID()).getName() + tempFam.getWifeID() + " and " 
+							+ individuals.get(tempFam.getHusbandID()).getName() + tempFam.getHusbandID() + " are Uncle/Aunt and Neice/Nephew and married. \n";
+				}
+			}
+		}	
+			
+       
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }	
 
 
 	// US18
