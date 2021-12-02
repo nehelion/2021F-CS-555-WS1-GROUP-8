@@ -510,11 +510,11 @@ public class Utils {
 					}
 					if(ind.getID().equals(fam.getHusbandID()))
 					{
-						mother = ind;
+						father = ind;
 					}
 					if(ind.getID().equals(fam.getWifeID()))
 					{
-						father = ind;
+						mother = ind;
 					}
 				}
 				
@@ -577,11 +577,11 @@ public class Utils {
 			{
 				if(ind.getID().equals(fam.getHusbandID()))
 				{
-					mother = ind;
+					father = ind;
 				}
 				if(ind.getID().equals(fam.getWifeID()))
 				{
-					father = ind;
+					mother = ind;
 				}
 			}
 			
@@ -617,6 +617,46 @@ public class Utils {
 			if(fatherAgeAtMarriage <= 14)
 			{
 				out = out + "ERROR: US10 conflict with Family " + fam.getID() + ", Father got married at age " + fatherAgeAtMarriage + " \n";
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
+	// US21
+	public String correctGenderRole(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			Individual mother = null;
+			Individual father = null;
+			
+			for(Individual ind : individuals.values())
+			{
+				if(ind.getID().equals(fam.getHusbandID()))
+				{
+					father = ind;
+				}
+				if(ind.getID().equals(fam.getWifeID()))
+				{
+					mother = ind;
+				}
+			}
+			
+			if(!mother.getGender().equals("F"))
+			{
+				out = out + "ERROR: US21 conflict with Family " + fam.getID() + ", Mother not Female \n";
+			}
+			
+			System.out.println(father.getGender());
+			
+			if(!father.getGender().equals("M"))
+			{
+				out = out + "ERROR: US21 conflict with Family " + fam.getID() + ", Father not Male \n";
 			}
 		}
 		if(out.length() == 0)

@@ -265,6 +265,13 @@ public class main_project
 			errorString = errorString.concat(US17);
 		}
 		
+		String US21 = utils.correctGenderRole(families,individuals);
+		if(!US21.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US21);
+		}
+
+		
 		String US23 = utils.uniqueNamesandBirthdays(families,individuals);
 		if(!US23.equalsIgnoreCase("CORRECT"))
 		{
