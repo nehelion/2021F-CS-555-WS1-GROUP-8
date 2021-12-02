@@ -647,8 +647,76 @@ public class Utils {
     }
 	
 	// US13
+	// If the difference between the youngest and oldest is more than 25 years. Mark as anomoly
+	public String siblingSpacing(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+	{
+		String out = "";
+		for (Family fam : families.values()) {
+			List<String> children = fam.getChildren();
+			if (children.size() < 2) {
+				continue;
+			}
+			ArrayList<Integer> children_ages = new ArrayList<>();
+			for (String id : children) {
+				Individual child = individuals.get(id);
+				String birth = child.getBirthday();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy/M/dd", Locale.ENGLISH);
+				Date birthdate = formatter.parse(birth);
+				Instant instant = birthdate.toInstant();
+				ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+				LocalDate givenDate = zone.toLocalDate();
+				Period period = Period.between(givenDate, LocalDate.now());
+				int dif = period.getYears();
+				children_ages.add(dif);
+			}
+			Collections.sort(children_ages);
+			if ((children_ages.get(0) - children_ages.get(children_ages.size() - 1)) > 25) {
+				out = out.concat("ERROR: US13 conflict with siblings in family " + fam.getID() + ", has children with a age difference of more then 25 years.\n");
+			}
+		}
+
+		if (out.length() == 0) {
+			out = "Correct";
+		}
+
+		return out;
+	}
+	
 	
 	// US14
+	public String multipleBirths(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+	{
+		String out = "";
+		Map<String, Integer> vals = new HashMap<>();
+		for (Individual indiv : individuals.values())
+		{
+			ArrayList<String> fam_id = indiv.getFams();
+			if(fam_id.size() == 0) {
+				continue;
+			}
+			Family fam = families.get(fam_id.get(0));
+			String mom = fam.getWifeID();
+			if (vals.containsKey(mom)) {
+				int t = vals.get(mom);
+				vals.replace(mom, t + 1);
+			} else {
+				vals.put(mom, 1);
+			}
+		}
+
+		boolean more = false;
+		for (String i : vals.keySet()) {
+			if (vals.get(i) > 5) {
+				out = out.concat("ERROR: US14 conflict with mother " + i + ", has more than 5 children.\n");
+			}
+		}
+
+		if (out.length() == 0) {
+			out = "Correct";
+		}
+
+		return out;
+	}
 	
 	// US15
 	public String tooManyChildren(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
