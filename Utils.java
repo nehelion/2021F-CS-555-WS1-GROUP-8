@@ -64,10 +64,10 @@ public class Utils {
           Date now = new Date();
           if (now.before(deathdate)) {
              out += "ERROR: US01 conflict with " + indiv.getID() + "\n";
-          } else {
-             out += "Correct\n";
           }
        }
+       if (out.length() == 0) out.concat("Correct");
+
        return out;
     }
 
@@ -90,7 +90,7 @@ public class Utils {
          if (deathdate.before(birthdate)) {
             out += "ERROR: US03 conflict with " + indiv.getID() + "\n";
          }
-         out += "Correct\n";
+         if (out.length() == 0) out.concat("Correct");
       }
       return out;
     }
@@ -756,7 +756,7 @@ public class Utils {
         } 
         catch (IOException e) 
         {
-            e.printStackTrace();
+            return null;
         }
         return contentBuilder.toString();
     }

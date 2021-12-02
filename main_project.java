@@ -19,7 +19,7 @@ public class main_project
 	public static Map<String, Individual> individuals = new HashMap<String, Individual>();
 	public static Map<String, Family> families = new HashMap<String, Family>();
 	public static Utils utils = new Utils();
-	public static String errorString = "";
+	public static String errorString = "\n\n";
 
 	private static void storeIndivs(String[] lines) {
 		boolean record = false;
@@ -102,13 +102,7 @@ public class main_project
 				dad.addFams(id);
 				Individual mom = individuals.get(wife);
 				mom.addFams(id);
-				//fam.setChildren(children);
-
 				families.put(fam.getID(), fam);	
-				// for (String string : children) {
-				// 	System.out.println(string);
-				// } 
-				// System.out.println(" tt ");	
 				children.clear();		
 			}
 			if (record) {
@@ -180,24 +174,30 @@ public class main_project
 
 	public static void runGEDFile(String file) throws Exception
 	{
-		String strOut = utils.readFile(file);
+		String strOut;
+		strOut = utils.readFile(file);
+
+		if (strOut == null) {
+			System.out.println("File not found. Please try again with a valid path.");
+			return;
+		}
+
 		String[] lines = strOut.split("\n");
 
 		storeIndivs(lines);
 		storeFamilies(lines);
-
 		
-		// String US01 = utils.isDeathInFuture(individuals);
-		// if(!US01.equalsIgnoreCase("CORRECT"))
-		// {
-		// 	errorString = errorString.concat(US01);
-		// }
+		String US01 = utils.isDeathInFuture(individuals);
+		if(!US01.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US01);
+		}
 
-		// String US02 = utils.isDeathBeforeBirth(individuals);
-		// if(!US02.equalsIgnoreCase("CORRECT"))
-		// {
-		// 	errorString = errorString.concat(US02);
-		// }
+		String US02 = utils.isDeathBeforeBirth(individuals);
+		if(!US02.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US02);
+		}
 		
 		String US03 = utils.bornBeforeDead(individuals);
 		if(!US03.equalsIgnoreCase("CORRECT"))
