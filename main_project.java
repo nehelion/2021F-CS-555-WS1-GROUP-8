@@ -223,6 +223,12 @@ public class main_project
 			errorString = errorString.concat(US06);
 		}
 		
+		String US07 = utils.overOneFifty(families,individuals);
+		if(!US07.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US07);
+		}
+		
 		String US08 = utils.birthBeforeParentMarriage(families,individuals);
 		if(!US08.equalsIgnoreCase("CORRECT"))
 		{
@@ -240,12 +246,22 @@ public class main_project
 		{
 			errorString = errorString.concat(US10);
 		}
+		
+		String US11 = utils.isThereBigamy(families,individuals);
+		if(!US11.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US11);
+		}
 
 		String US12 = utils.areParentsTooOld(families,individuals);
 		if(!US12.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US12);
 		}
+		
+		// US13
+		
+		// US14
 		
 		String US15 = utils.tooManyChildren(families,individuals);
 		if(!US15.equalsIgnoreCase("CORRECT"))
@@ -257,6 +273,12 @@ public class main_project
 		if(!US16.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US16);
+		}
+		
+		String US17 = utils.noMarriageToDecendents(families,individuals);
+		if(!US17.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US17);
 		}
 
 		String US18 = utils.areSibilingsMarried(families,individuals);
@@ -277,12 +299,6 @@ public class main_project
 			errorString = errorString.concat(US20);
 		}
 
-		String US17 = utils.noMarriageToDecendents(families,individuals);
-		if(!US17.equalsIgnoreCase("CORRECT"))
-		{
-			errorString = errorString.concat(US17);
-		}
-		
 		String US21 = utils.correctGenderRole(families,individuals);
 		if(!US21.equalsIgnoreCase("CORRECT"))
 		{
@@ -305,12 +321,6 @@ public class main_project
 		if(!US24.equalsIgnoreCase("CORRECT"))
 		{
 			errorString = errorString.concat(US24);
-		}
-
-		String US11 = utils.isThereBigamy(families,individuals);
-		if(!US11.equalsIgnoreCase("CORRECT"))
-		{
-			errorString = errorString.concat(US11);
 		}
 
 		printIndividuals();
