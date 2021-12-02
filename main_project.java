@@ -223,6 +223,12 @@ public class main_project
 			errorString = errorString.concat(US06);
 		}
 		
+		String US08 = utils.birthBeforeParentMarriage(families,individuals);
+		if(!US08.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US08);
+		}
+		
 		String US09 = utils.birthBeforeParentDeath(families,individuals);
 		if(!US09.equalsIgnoreCase("CORRECT"))
 		{

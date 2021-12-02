@@ -490,6 +490,58 @@ public class Utils {
 		return out;
     }
 	
+	// US8
+	public String birthBeforeParentMarriage(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		for(Family fam : families.values())
+		{
+			for(String chil : fam.getChildren())
+			{
+				Individual child = null;
+				Individual mother = null;
+				Individual father = null;
+				
+				for(Individual ind : individuals.values())
+				{
+					if(ind.getID().equals(chil))
+					{
+						child = ind;
+					}
+					if(ind.getID().equals(fam.getHusbandID()))
+					{
+						father = ind;
+					}
+					if(ind.getID().equals(fam.getWifeID()))
+					{
+						mother = ind;
+					}
+				}
+				
+				String[] childBirthDaySects = child.getBirthday().split("/");
+				String[] marriageDaySects = fam.getMarrDate().split("/");
+					
+				if(Integer.parseInt(childBirthDaySects[0]) > Integer.parseInt(marriageDaySects[0]))
+				{
+					out = out + "ERROR: US08 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") before marriage year (" + fam.getMarrDate() + ") \n";
+				}
+				else if(Integer.parseInt(childBirthDaySects[1]) > Integer.parseInt(marriageDaySects[1]))
+				{
+					out = out + "ERROR: US08 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") before marriage year/month (" + fam.getMarrDate() + ") \n";
+				}
+				else if(Integer.parseInt(childBirthDaySects[2]) > Integer.parseInt(marriageDaySects[2]))
+				{
+					out = out + "ERROR: US08 conflict with Family " + fam.getID() + ", Child " + child.getName() + " was born (" + child.getBirthday() + ") before marriage year/month/day (" + fam.getMarrDate() + ") \n";
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
+	
 	// US09
 	public String birthBeforeParentDeath(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
