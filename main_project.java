@@ -259,9 +259,18 @@ public class main_project
 			errorString = errorString.concat(US12);
 		}
 		
-		// US13
+		String US13 = utils.siblingSpacing(families,individuals);
+		if(!US13.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US13);
+		}
 		
 		// US14
+		String US14 = utils.multipleBirths(families,individuals);
+		if(!US14.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US14);
+		}
 		
 		String US15 = utils.tooManyChildren(families,individuals);
 		if(!US15.equalsIgnoreCase("CORRECT"))
