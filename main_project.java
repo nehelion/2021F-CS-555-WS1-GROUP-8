@@ -264,6 +264,12 @@ public class main_project
 		{
 			errorString = errorString.concat(US18);
 		}
+		
+		String US19 = utils.noFirstCousinMarriage(families,individuals);
+		if(!US19.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US19);
+		}
 
 		String US17 = utils.noMarriageToDecendents(families,individuals);
 		if(!US17.equalsIgnoreCase("CORRECT"))

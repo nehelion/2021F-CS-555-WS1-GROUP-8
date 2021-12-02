@@ -391,6 +391,47 @@ public class Utils {
 		}
 		return out;
     }
+	
+	// US19
+	public String noFirstCousinMarriage(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		List<String> grandChildren = new ArrayList<String>();
+		
+		for(Family fam : families.values())
+		{
+			if(fam.getChildren().size() > 1)
+			{
+				List<String> children = fam.getChildren();
+				
+				for(Family fam_second : families.values())
+				{
+					if(children.contains(fam_second.getHusbandID()) || children.contains(fam_second.getWifeID()))
+					{
+						for(String chil : fam_second.getChildren())
+						{
+							grandChildren.add(chil);
+						}
+					}
+				}
+			}
+        }    
+        for(Family tempFam : families.values())
+        {
+            if(grandChildren.contains(tempFam.getHusbandID()) && grandChildren.contains(tempFam.getWifeID()))
+            {
+                out = out + "ERROR: US19 conflict with Family " + tempFam.getID() + ".  " 
+						  + individuals.get(tempFam.getWifeID()).getName() + tempFam.getWifeID() + " and " 
+						  + individuals.get(tempFam.getHusbandID()).getName() + tempFam.getHusbandID() + " are first cousins and married. \n";
+            }
+        }
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }	
+
 
 	// US18
     public String areSibilingsMarried(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
