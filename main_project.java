@@ -271,6 +271,11 @@ public class main_project
 			errorString = errorString.concat(US21);
 		}
 
+		String US22 = utils.uniqueFamById(families,individuals);
+		if(!US22.equalsIgnoreCase("CORRECT"))
+		{
+			errorString = errorString.concat(US22);
+		}
 		
 		String US23 = utils.uniqueNamesandBirthdays(families,individuals);
 		if(!US23.equalsIgnoreCase("CORRECT"))

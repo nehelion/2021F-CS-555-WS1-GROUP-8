@@ -665,6 +665,35 @@ public class Utils {
 		}
 		return out;
     }
+	
+	// US22
+	public String uniqueFamById(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
+    {
+		String out = "";
+		int count = 0;
+		Family[] family_list = new Family[families.size()];
+		
+		for(Family fam : families.values())
+		{
+			family_list[count] = fam;
+			count++;
+		}
+		for(int i = 0; i < family_list.length; i++)
+		{
+			for(int j = i + 1; j < family_list.length; j++)
+			{
+				if(family_list[i].getID().equals(family_list[j].getID()))
+				{
+					out = out + "ERROR: US22 conflict with Family " + family_list[i].getID() + ", not unique \n";
+				}
+			}
+		}
+		if(out.length() == 0)
+		{
+			out.concat("Correct");
+		}
+		return out;
+    }
 
     public String noMarriageToDecendents(Map<String, Family> families, Map<String, Individual> individuals) throws Exception
     {
